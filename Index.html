@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>Grafische Datenverarbeitung</title>
+    <script src="http://threejs.org/build/three.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    
+    <script type="text/javascript" src="Scripte/Spielfeld.js"></script>
+    <script type="text/javascript" src="Scripte/Menue.js"></script>
+    <script type="text/javascript" src="Scripte/Steuerung.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="StyleSheet/StyleSheet.css">
+  </head>
+  <body>
+    <script>
+      var gestartet = false;
+      
+      // Erstellt die Scene auf der "gearbeitet" wird
+      var scene = new THREE.Scene();
+      
+      // Erstellt eine Kamera mit den Attributen
+      var camera = new THREE.PerspectiveCamera(75,
+        window.innerWidth / window.innerHeight, 0.1, 1000);
+      
+      
+      setzeKamera();
+
+      // Setzt die Kamera an den beschrieben Ort
+      function setzeKamera() {
+        camera.position.set(0, 7, 7);
+        camera.lookAt(scene.position);
+      }
+
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      erstelleSpielfeld();
+
+      var render = function() {
+        requestAnimationFrame(render);
+
+        renderer.render(scene, camera);
+      };
+
+      render();
+    </script>
+    <div id="overlay">
+     <div>
+          <p>Mensch ärgere Dich nicht</p>
+          Anzahl der Spieler 
+          <select id="spieleranzahl" onchange="spielerGewaehlt(this)" >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+          </select>
+          <br>
+          <button onclick='' type='button' >Weiter</button>
+          <button onclick='schliesseStartmenue()' type='button'>Beenden</button>
+     </div>
+    </div>
+    <a href='#' onclick='erstelleStartmenue()'>Click here to show the overlay</a>
+  </body>
+</html>
