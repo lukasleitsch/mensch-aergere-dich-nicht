@@ -50,7 +50,19 @@
 
      $('.spieler_farben span').each(function(index, el) {
         $(this).click(function(event) {
-            $(this).addClass('aktiv');
+            $(this).parent().find('span').each(function(index, el) {
+                $(this).removeClass('active');
+            });
+            $(this).addClass('active');
+            var aktuelle_farbe = $(this).attr('class').split(' ')[0];
+            var aktuelle_active = $(this).attr('class').split(' ')[1];
+            console.log(aktuelle_active);
+            console.log($(this));
+            $('.spieler_farben span').each(function(index, el) {
+                if($(this).hasClass(aktuelle_farbe) && !$(this).hasClass(aktuelle_active)) {
+                    $(this).addClass('disabled');
+                }
+            });
         });
      });
 });

@@ -24,12 +24,12 @@ body {
 
 .spieler_farben {
 	span {
-		width: 15px;
-		height: 15px;
 		display: inline-block;
 		vertical-align: text-top;
 		margin-right: 10px;
 		cursor: pointer;
+		@extend .btn;
+		@extend .btn-default;
 		&.red {
 			background-color: red;
 		}
@@ -48,7 +48,4 @@ body {
 		}
 	}
 
-	.aktiv {
-		border: 2px solid black;
-	}
 }
