@@ -5648,3 +5648,23 @@ body {
     position: absolute;
     right: 10px;
     bottom: 10px; }
+
+.spieler_farben span {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 10px;
+  cursor: pointer; }
+  .spieler_farben span.red {
+    background-color: red; }
+  .spieler_farben span.blau {
+    background-color: blue; }
+  .spieler_farben span.gelb {
+    background-color: yellow; }
+  .spieler_farben span.gruen {
+    background-color: green; }
+  .spieler_farben span:hover {
+    border: 1px solid black; }
+.spieler_farben .aktiv {
+  border: 2px solid black; }

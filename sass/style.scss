@@ -21,3 +21,34 @@ body {
 		bottom: 10px;
 	}
 }
+
+.spieler_farben {
+	span {
+		width: 15px;
+		height: 15px;
+		display: inline-block;
+		vertical-align: text-top;
+		margin-right: 10px;
+		cursor: pointer;
+		&.red {
+			background-color: red;
+		}
+		&.blau {
+			background-color: blue;
+		}
+		&.gelb {
+			background-color: yellow;
+		}
+		&.gruen {
+			background-color: green;
+		}
+
+		&:hover {
+			border: 1px solid black;
+		}
+	}
+
+	.aktiv {
+		border: 2px solid black;
+	}
+}

@@ -47,6 +47,12 @@
      $('button.pause').click(function(event) {
         $('#menu').modal('show');
      });
+
+     $('.spieler_farben span').each(function(index, el) {
+        $(this).click(function(event) {
+            $(this).addClass('aktiv');
+        });
+     });
 });
 
 
