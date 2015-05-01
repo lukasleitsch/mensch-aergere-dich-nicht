@@ -8,6 +8,8 @@
  * Spiels einstellen und waehlen kann
  */
 
+ var farben_spieler = new Array(4);
+
  $(function() {
 
     var anzahl_spieler = 2;
@@ -54,10 +56,11 @@
                 $(this).removeClass('active');
             });
             $(this).addClass('active');
+            console.log($(this));
+            farben_spieler[$(this).parent().attr('class')] = $(this).attr('class').split(' ')[0];
+            console.log(farben_spieler);
             var aktuelle_farbe = $(this).attr('class').split(' ')[0];
             var aktuelle_active = $(this).attr('class').split(' ')[1];
-            console.log(aktuelle_active);
-            console.log($(this));
             $('.spieler_farben span').each(function(index, el) {
                 if($(this).hasClass(aktuelle_farbe) && !$(this).hasClass(aktuelle_active)) {
                     $(this).addClass('disabled');
