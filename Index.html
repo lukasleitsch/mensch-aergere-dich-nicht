@@ -9,6 +9,8 @@ and open the template in the editor.
     <title>Grafische Datenverarbeitung</title>
     <script src="js/three.min.js"></script>
     <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap/modal.js"></script>
+
     
     <script type="text/javascript" src="js/spielfeld.js"></script>
     <script type="text/javascript" src="js/menue.js"></script>
@@ -49,22 +51,43 @@ and open the template in the editor.
       };
 
       render();
+
     </script>
-    <div id="overlay">
-     <div>
-          <p>Mensch ärgere Dich nicht</p>
-          Anzahl der Spieler 
-          <select id="spieleranzahl" onchange="spielerGewaehlt(this)" >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-          </select>
-          <br>
-          <button onclick='' type='button' >Weiter</button>
-          <button onclick='schliesseStartmenue()' type='button'>Beenden</button>
-     </div>
+
+
+    <div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Mensch ärgere Dich nicht</h4>
+          </div>
+          <div class="modal-body">
+            Anzahl der Spieler 
+            <select id="spieleranzahl">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <div class="spieler_farbe">
+              <div class="spieler_1">Spieler 1</div>
+              <div class="spieler_2">Spieler 2</div>
+              <div class="spieler_3">Spieler 3</div>
+              <div class="spieler_4">Spieler 4</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="menue_speichern">Speichern</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <a href='#' onclick='erstelleStartmenue()'>Click here to show the overlay</a>
+
+
+    <div class="pause">
+      <button class="btn btn-default pause" >Pause</button>
+    </div>
+
   </body>
 </html>

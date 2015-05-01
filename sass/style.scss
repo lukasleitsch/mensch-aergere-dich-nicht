@@ -1,0 +1,23 @@
+@import "bootstrap";
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+// Spieler 3 und 4 ausblenden
+
+#menu {
+	.spieler_3, .spieler_4 {
+		display: none;
+	}
+}
+
+.pause {
+	position: relative;
+	button {
+		position: absolute;
+		right: 10px;	
+		bottom: 10px;
+	}
+}
