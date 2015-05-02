@@ -46,21 +46,27 @@
          }
      });
 
+     // Zeige Menue, wenn der Button Pause gedrückt wird
+
      $('button.pause').click(function(event) {
         $('#menu').modal('show');
      });
 
+
+    // Farbe für Spieler festhalten und gleiche Farbe für andere Spieler deaktivieren
+
      $('.spieler_farben span').each(function(index, el) {
         $(this).click(function(event) {
+            // Setze alle aktiven Farben zurück
             $(this).parent().find('span').each(function(index, el) {
                 $(this).removeClass('active');
             });
+            // Ausgewählte Farbe als aktiv setzen
             $(this).addClass('active');
-            console.log($(this));
             farben_spieler[$(this).parent().attr('class')] = $(this).attr('class').split(' ')[0];
-            console.log(farben_spieler);
             var aktuelle_farbe = $(this).attr('class').split(' ')[0];
             var aktuelle_active = $(this).attr('class').split(' ')[1];
+            // Die ausgewählte Farbe für andere Spieler deaktivieren
             $('.spieler_farben span').each(function(index, el) {
                 if($(this).hasClass(aktuelle_farbe) && !$(this).hasClass(aktuelle_active)) {
                     $(this).addClass('disabled');

@@ -22,6 +22,14 @@ body {
 	}
 }
 
+.anzahl_spieler {
+	padding-bottom: 1.5em;
+	font-size: 1.4em;
+	select {
+		vertical-align: text-bottom;
+	}
+}
+
 .spieler_farben {
 	span {
 		display: inline-block;
