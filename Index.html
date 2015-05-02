@@ -34,11 +34,14 @@ and open the template in the editor.
 
       // Setzt die Kamera an den beschrieben Ort
       function setzeKamera() {
-        camera.position.set(-9, 5, 2);
+        camera.position.set(-6, 7, 0);
         camera.lookAt(scene.position);
       }
 
-      var renderer = new THREE.WebGLRenderer();
+      var renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true
+      });
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
