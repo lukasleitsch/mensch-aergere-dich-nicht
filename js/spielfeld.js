@@ -30,8 +30,13 @@ function erstelleSpielfeld() {
 function importiereSpielhuetchen(){
   loader = new THREE.JSONLoader();
   
-  loader.load("models/Spielhut.json", function (geometry){
-    scene.add(geometry);
+  loader.load("models/Spielhut.json", function (obj){
+    var material = new THREE.MeshBasicMaterial({
+      color: 0x1AC811
+    });
+    var mesh = new THREE.Mesh(obj, material);
+    mesh.scale.set(0.21, 0.21, 0.21);
+    scene.add(mesh);
     render();
   });
 }
