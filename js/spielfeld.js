@@ -21,7 +21,19 @@ function erstelleSpielfeld() {
     });
     var cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
+    importiereSpielhuetchen ();
+}
 
+/*
+ * Importiert die Spielhuetchen
+ */
+function importiereSpielhuetchen(){
+  loader = new THREE.JSONLoader();
+  
+  loader.load("models/Spielhut.json", function (geometry){
+    scene.add(geometry);
+    render();
+  });
 }
 
 /*
