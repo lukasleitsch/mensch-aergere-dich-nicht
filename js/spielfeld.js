@@ -21,19 +21,54 @@ function erstelleSpielfeld() {
     });
     var cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
-    importiereSpielhuetchen ();
+    //scene.add(geometry);
+
+    //importiereSpielhuetchen ();
+    spielfigure();
 }
 
 /*
  * Importiert die Spielhuetchen
  */
-function importiereSpielhuetchen(){
-  loader = new THREE.JSONLoader();
+// function importiereSpielhuetchen(){
+//   loader = new THREE.JSONLoader();
   
-  loader.load("models/Spielhut.json", function (geometry){
-    scene.add(geometry);
-    render();
-  });
+//   loader.load("models/Spielhut.json", function (geometry){
+//     scene.add(geometry);
+//     render();
+//   });
+// }
+
+// Spielfigur
+
+function spielfigure() {
+    group = new THREE.Object3D();
+
+    var geometry = new THREE.SphereGeometry( 0.23, 32, 32 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var sphere = new THREE.Mesh( geometry, material );
+    sphere.position.set(0,1,0);
+    group.add(sphere);
+
+    var geometry = new THREE.CylinderGeometry( 0, 0.3, 1, 32 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var cylinder = new THREE.Mesh( geometry, material );
+    cylinder.position.setY(0.7);
+    group.add(cylinder);
+
+    var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.4, 32 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var cylinder = new THREE.Mesh( geometry, material );
+    group.add(cylinder);
+
+    // group.position.set(2,2,3);
+
+    group.position.set(-4,0,5);
+    // group.position.set(0,0,3);
+
+    scene.add(group);
+
+
 }
 
 /*
