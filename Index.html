@@ -11,25 +11,25 @@ and open the template in the editor.
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/modal.js"></script>
 
-    
+
     <script type="text/javascript" src="js/spielfeld.js"></script>
     <script type="text/javascript" src="js/menue.js"></script>
     <script type="text/javascript" src="js/steuerung.js"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
     <script>
       var gestartet = false;
-      
+
       // Erstellt die Scene auf der "gearbeitet" wird
       var scene = new THREE.Scene();
-      
+
       // Erstellt eine Kamera mit den Attributen
       var camera = new THREE.PerspectiveCamera(75,
-        window.innerWidth / window.innerHeight, 0.1, 1000);
-      
-      
+              window.innerWidth / window.innerHeight, 0.1, 1000);
+
+
       setzeKamera();
 
       // Setzt die Kamera an den beschrieben Ort
@@ -38,6 +38,9 @@ and open the template in the editor.
         camera.lookAt(scene.position);
       }
 
+      var ambientLight = new THREE.AmbientLight(0x000044);
+      var directionalLight = new THREE.DirectionalLight(0xffffff);
+
       var renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true
@@ -45,16 +48,17 @@ and open the template in the editor.
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
-      erstelleSpielfeld();
+      directionalLight.position.set(0, 10, 0).normalize();
 
+      scene.add(directionalLight);
+      scene.add(ambientLight);
+      erstelleSpielfeld();
       var render = function() {
         requestAnimationFrame(render);
 
         renderer.render(scene, camera);
       };
-
       render();
-
     </script>
 
 
@@ -66,14 +70,14 @@ and open the template in the editor.
             <h4 class="modal-title" id="myModalLabel">Mensch ärgere Dich nicht</h4>
           </div>
           <div class="modal-body">
-          <div class="anzahl_spieler">
-            <span>Anzahl der Spieler</span>
-            <select id="spieleranzahl">
+            <div class="anzahl_spieler">
+              <span>Anzahl der Spieler</span>
+              <select id="spieleranzahl">
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
-            </select>
-          </div>
+              </select>
+            </div>
             <div class="spieler_farben">
               <div class="spieler_1">Spieler 1 <span class="red"></span><span class="blau"></span><span class="gelb"></span><span class="gruen"></span></div>
               <div class="spieler_2">Spieler 2 <span class="red"></span><span class="blau"></span><span class="gelb"></span><span class="gruen"></span></div>
