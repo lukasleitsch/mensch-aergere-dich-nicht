@@ -31,14 +31,14 @@ function importiereSpielhuetchen() {
   loader = new THREE.JSONLoader();
 
   loader.load("models/Spielhut.json", function(obj) {
-    var material = new THREE.MeshLambertMaterial({
+    var materialGruen = new THREE.MeshLambertMaterial({
       color: 0x069C06,
       emissive: 0x069C06
     });
-    var mesh = new THREE.Mesh(obj, material);
-    mesh.scale.set(0.19, 0.19, 0.19);
-    mesh.position.set(0, 0.1, 0);
-    scene.add(mesh);
+    var hutGruen = new THREE.Mesh(obj, materialGruen);
+    hutGruen.scale.set(0.19, 0.19, 0.19);
+    hutGruen.position.set(0, 0.1, 0);
+    scene.add(hutGruen);
   });
 }
 
