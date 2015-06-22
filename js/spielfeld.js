@@ -20,57 +20,54 @@ function erstelleSpielfeld() {
     color: 0xDCC088
   });
   var cube = new THREE.Mesh(geometry, material);
+  cube.castShadow = true;
   scene.add(cube);
-  importiereSpielhuetchen();
-  spielfigure();
+  spielfigure(0xFFFC00);
 }
 
 
 // Spielfigur
 
-function spielfigure() {
+function spielfigure(color) {
+
     group = new THREE.Object3D();
 
-    var geometry = new THREE.SphereGeometry( 0.23, 32, 32 );
-    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-    var sphere = new THREE.Mesh( geometry, material );
-    sphere.position.set(0,1,0);
-    group.add(sphere);
+    // Fuß
+
+    var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.3, 32 );
+    var material = new THREE.MeshPhongMaterial( {color: color} );
+    var cylinder = new THREE.Mesh( geometry, material );
+    group.add(cylinder);
+
+
+    //Körper
 
     var geometry = new THREE.CylinderGeometry( 0, 0.3, 1, 32 );
-    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var material = new THREE.MeshPhongMaterial( {color: color} );
     var cylinder = new THREE.Mesh( geometry, material );
-    cylinder.position.setY(0.7);
+    cylinder.position.setY(0.65);
     group.add(cylinder);
 
-    var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.4, 32 );
-    var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-    var cylinder = new THREE.Mesh( geometry, material );
-    group.add(cylinder);
+    // Kopf
+
+    var geometry = new THREE.SphereGeometry( 0.23, 32, 32 );
+    var material = new THREE.MeshPhongMaterial( {color: color} );
+    var sphere = new THREE.Mesh( geometry, material );
+    sphere.position.setY(1);
+    group.add(sphere);
+
+
+    group.castShadow = true;
+
 
     // group.position.set(2,2,3);
 
-    group.position.set(-4,0,5);
-    // group.position.set(0,0,3);
+    group.position.set(-2,0,2);
+    // group.position.set(-1,1,0);
 
     scene.add(group);
 }
 
-
-function importiereSpielhuetchen() {
-  loader = new THREE.JSONLoader();
-
-  loader.load("models/Spielhut.json", function(obj) {
-    var materialGruen = new THREE.MeshLambertMaterial({
-      color: 0x069C06,
-      emissive: 0x069C06
-    });
-    var hutGruen = new THREE.Mesh(obj, materialGruen);
-    hutGruen.scale.set(0.19, 0.19, 0.19);
-    hutGruen.position.set(0, 0.1, 0);
-    scene.add(hutGruen);
-  });
-}
 
 /*
  * Initialisiert ein Array mit geometrischen Kreisen

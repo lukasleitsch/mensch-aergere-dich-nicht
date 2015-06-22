@@ -15,7 +15,7 @@ $(function() {
   var anzahl_spieler = 2;
 
   // Zeige Menü nach dem Laden der Seite
-  $('#menu').modal();
+  // $('#menu').modal();
 
 
   // Speichern des Menüs
