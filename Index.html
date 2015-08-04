@@ -20,49 +20,55 @@ and open the template in the editor.
   </head>
   <body>
     <script>
-      var gestartet = false;
-
       // Erstellt die Scene auf der "gearbeitet" wird
       var scene = new THREE.Scene();
 
       // Erstellt eine Kamera mit den Attributen
       var camera = new THREE.PerspectiveCamera(75,
               window.innerWidth / window.innerHeight, 0.1, 1000);
-
-
-      setzeKamera();
-
-      // Setzt die Kamera an den beschrieben Ort
-      function setzeKamera() {
-        camera.position.set(-6, 8, 0);
-        camera.lookAt(scene.position);
-      }
-
+          
+      // Erstellt Lichter
       var ambientLight = new THREE.AmbientLight(0x000044);
       var directionalLight = new THREE.DirectionalLight(0xffffff);
-
+      
+      // Erstellt den Renderer
       var renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true
       });
-
-
+              
+      // Setzt die Kamera an den beschrieben Ort
+      function setzeKamera() {
+        camera.position.set(0, 10, 0);
+        camera.up.set( 0, 1, 0 );
+        camera.lookAt(scene.position);
+      }
+      
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
-
+      
+      // Richtungslicht nach oben setzen
       directionalLight.position.set(0, 5, 0);
 
+      // Licher der Scene hinzufuegen
       scene.add(directionalLight);
-
-
       scene.add(ambientLight);
-      erstelleSpielfeld();
+      
+      // Setzt die Kamera in Position
+      setzeKamera();
+      
+      scene.add(camera);
+      
+      // Loop-Funktion aufrufen
       var render = function() {
         requestAnimationFrame(render);
 
         renderer.render(scene, camera);
       };
       render();
+      
+      // Beginnt das Spiel
+      beginneSpiel();
     </script>
 
 

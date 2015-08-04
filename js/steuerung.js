@@ -4,14 +4,17 @@
  */
 
 //Globale Variablen
-var spieler = new array[4];             //Spielerobjekte
+var spieler = new Array(4);             //Spielerobjekte
 var run = true;                         //Abbruchbedingung
 
 /*
- * Steuert den Programmablauf
+ * Startet und initialisiert das Spiel
+ * Beendet wird es durch einen Sieg oder durch beenden (run = false)
  */
 function beginneSpiel(anzahl){
-    if (anzahl < 2 || anzahl > 4 || anzahl instanceof Integer){
+    erstelleSpielfeld();
+    rotateCamera((-90 * Math.PI / 180));
+    if (anzahl < 2 || anzahl > 4 || typeof anzahl === 'number'){
         throw "Fehler, bitte erneut Versuchen.";
     }
     var spielernummer = 0;
@@ -75,5 +78,12 @@ function setzeHut(spielernummer){
  * seine Huete auf dem Spielfeld hat, waehrend die Mitspieler ihrer im Ziel haben.
  */
 function pruefeFertig(){
+
+}
+
+/*
+ * Animiert die Kamerabewegung um 90° im Uhrzeigersinn
+ */
+function rotateCamera() {
 
 }
