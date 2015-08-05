@@ -13,6 +13,7 @@ var run = true;                         //Abbruchbedingung
  */
 function beginneSpiel(anzahl){
     erstelleSpielfeld();
+    initialisiereSpieler({aktiv: true, name: "Lukas"});
     rotateCamera((-90 * Math.PI / 180));
     if (anzahl < 2 || anzahl > 4 || typeof anzahl === 'number'){
         throw "Fehler, bitte erneut Versuchen.";
@@ -57,6 +58,12 @@ function initialisiereSpieler(anzahl, farbe, name){
             wurdeRausgeschmissen: 0
         };
     }
+
+    //Spielfiguren setzen 
+
+    function spielfigurInitialisieren() {
+        spielfigure(0xFFFC00, spielerGelb.haus1.x, spielerGelb.haus1.y);
+    }
     return true;
 }
 
@@ -87,3 +94,4 @@ function pruefeFertig(){
 function rotateCamera() {
 
 }
+

@@ -22,13 +22,12 @@ function erstelleSpielfeld() {
   var cube = new THREE.Mesh(geometry, material);
   cube.castShadow = true;
   scene.add(cube);
-  spielfigure(0xFFFC00);
 }
 
 
 // Spielfigur
 
-function spielfigure(color) {
+function spielfigure(color, positionX, positionY) {
 
     group = new THREE.Object3D();
 
@@ -62,11 +61,12 @@ function spielfigure(color) {
 
     // group.position.set(2,2,3);
 
-    group.position.set(-2,0,2);
+    group.position.set(positionX,0,positionY);
     // group.position.set(-1,1,0);
 
     scene.add(group);
 }
+
 
 
 /*
