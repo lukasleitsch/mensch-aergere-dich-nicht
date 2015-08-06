@@ -13,9 +13,9 @@ var run = true;                         //Abbruchbedingung
  */
 function beginneSpiel(anzahl){
     erstelleSpielfeld();
-    initialisiereSpieler({aktiv: true, name: "Lukas"});
+    initialisiereSpieler();
     rotateCamera((-90 * Math.PI / 180));
-    if (anzahl < 2 || anzahl > 4 || typeof anzahl === 'number'){
+    if (anzahl <= 2 && anzahl >= 4){
         throw "Fehler, bitte erneut Versuchen.";
     }
     var spielernummer = 0;
@@ -29,42 +29,6 @@ function beginneSpiel(anzahl){
             run = !run;
         }
     }
-}
-
-/*
- * Funktion die auf Grundlage der Spieleranzahl entsprechende Objekte erzeugt
- * Aufbau des Spielerobjektes:
- *      Farbe
- *      Im Haus stehende Huete
- *      Auf dem Feld stehende Huete
- *      Name des Spielers
- *      Summe der Würfelaugen
- */
-function initialisiereSpieler(anzahl, farbe, name){
-    if (anzahl.length < 1 || anzahl.length > 4){
-        throw "Number of Player not available. Please change it.";
-    }
-    if (anzahl.length === 1){
-        throw "Forever alone...Get friends!";
-    }
-    for (i = 0; i < anzahl.length; i++){
-        spieler[i] = {
-            farbe: farbe[i],
-            imHaus : 4,
-            aufFeld : 0,
-            name: name[i],
-            wuerfelsumme: 0,            //Ab hier Statistik
-            hatRausgeschmissen: 0,
-            wurdeRausgeschmissen: 0
-        };
-    }
-
-    //Spielfiguren setzen 
-
-    function spielfigurInitialisieren() {
-        spielfigure(0xFFFC00, spielerGelb.haus1.x, spielerGelb.haus1.y);
-    }
-    return true;
 }
 
 /*

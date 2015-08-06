@@ -16,11 +16,11 @@ var segmente = 50;
 function erstelleSpielfeld() {
   intialisiereSpielfelder();
   var geometry = new THREE.BoxGeometry(11, 0.1, 11);
-  var material = new THREE.MeshBasicMaterial({
-    color: 0xDCC088
+  var material = new THREE.MeshPhongMaterial({
+    color: 0xF1B55B
   });
   var cube = new THREE.Mesh(geometry, material);
-  cube.castShadow = true;
+  cube.receiveShadow = true;
   scene.add(cube);
 }
 
@@ -33,36 +33,37 @@ function spielfigure(color, positionX, positionY) {
 
     // Fuß
 
-    var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.3, 32 );
+    var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.3, segmente );
     var material = new THREE.MeshPhongMaterial( {color: color} );
     var cylinder = new THREE.Mesh( geometry, material );
+    cylinder.castShadow = true;
+    cylinder.receiveShadow = true;
     group.add(cylinder);
 
 
     //Körper
 
-    var geometry = new THREE.CylinderGeometry( 0, 0.3, 1, 32 );
+    var geometry = new THREE.CylinderGeometry( 0, 0.3, 1, segmente );
     var material = new THREE.MeshPhongMaterial( {color: color} );
     var cylinder = new THREE.Mesh( geometry, material );
     cylinder.position.setY(0.65);
+    cylinder.castShadow = true;
+    cylinder.receiveShadow = true;
     group.add(cylinder);
 
     // Kopf
 
-    var geometry = new THREE.SphereGeometry( 0.23, 32, 32 );
+    var geometry = new THREE.SphereGeometry( 0.23, 32, segmente );
     var material = new THREE.MeshPhongMaterial( {color: color} );
     var sphere = new THREE.Mesh( geometry, material );
     sphere.position.setY(1);
+    sphere.castShadow = true;
+    sphere.receiveShadow = true;
+
     group.add(sphere);
 
 
-    group.castShadow = true;
-
-
-    // group.position.set(2,2,3);
-
-    group.position.set(positionX,0,positionY);
-    // group.position.set(-1,1,0);
+    group.position.set(positionX, 0, positionY);
 
     scene.add(group);
 }
@@ -78,23 +79,23 @@ function spielfigure(color, positionX, positionY) {
 function intialisiereSpielfelder() {
   var cylinderGeometry = new THREE.CylinderGeometry(radius, radius, 0.2, segmente);
   // Material fuer Spielfelder
-  var materialCylinder = new THREE.MeshBasicMaterial({
-    color: 0xFAFAD9
+  var materialCylinder = new THREE.MeshPhongMaterial({
+    color: 0xFFFFFF
   });
   // Materialfarbe fuer Spieler Gelb
-  var materialGelb = new THREE.MeshBasicMaterial({
+  var materialGelb = new THREE.MeshPhongMaterial({
     color: 0xFFFC00
   });
   // Materialfarbe fuer Spieler Gruen
-  var materialGruen = new THREE.MeshBasicMaterial({
+  var materialGruen = new THREE.MeshPhongMaterial({
     color: 0x2EAE00
   });
   // Materialfarbe fuer Spieler Blau
-  var materialBlau = new THREE.MeshBasicMaterial({
+  var materialBlau = new THREE.MeshPhongMaterial({
     color: 0x2600FF
   });
   // Materialfarbe fuer Spieler Rot
-  var materialRot = new THREE.MeshBasicMaterial({
+  var materialRot = new THREE.MeshPhongMaterial({
     color: 0xFF0000
   });
 
@@ -153,6 +154,8 @@ function intialisiereSpielfelder() {
 
   // Fuegt die Spielfelder der Szene hinzu
   for (var i = 0; i < spielfelder.length; i++) {
+    spielfelder[i].castShadow = true;
+    spielfelder[i].receiveShadow = true;
     scene.add(spielfelder[i]);
   }
 
@@ -174,18 +177,21 @@ function intialisiereSpielfelder() {
       for (var j = 0; j < 4; j++) {
         gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
         hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
+
       }
     }
     if (i === 2) {
       for (var j = 0; j < 4; j++) {
         gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
         hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
+
       }
     }
     if (i === 3) {
       for (var j = 0; j < 4; j++) {
         gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
         hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
+
       }
     }
   }
@@ -232,8 +238,13 @@ function intialisiereSpielfelder() {
 
   for (var i = 0; i < 4; i++) {
     for (var j = 0; j < 4; j++) {
+      gewinnfelder[i][j].castShadow = true;
+      gewinnfelder[i][j].receiveShadow = true;
+      hausfelder[i][j].castShadow = true;
+      hausfelder[i][j].receiveShadow = true;
       scene.add(gewinnfelder[i][j]);
       scene.add(hausfelder[i][j]);
     }
   }
+
 }
