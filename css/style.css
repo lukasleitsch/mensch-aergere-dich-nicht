@@ -5702,3 +5702,10 @@ body {
     background-color: green; }
   .spieler_farben span:hover {
     border: 1px solid black; }
+
+.wuerfeln {
+  position: relative; }
+  .wuerfeln button {
+    position: absolute;
+    left: 10px;
+    bottom: 10px; }

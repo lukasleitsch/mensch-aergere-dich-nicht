@@ -38,6 +38,14 @@ function wuerfeln(spielernummer){
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     return Math.floor((Math.random() * 6) + 1);
 }
+$(function() {
+    $('button.wuerfeln').click(function(event) {
+        new TWEEN.Tween(cube.rotation).to({ y: 30, x: 30 }, 200).onUpdate(function(){
+            cube.rotation.y = this.y;
+            cube.rotation.x = this.x;
+        }).start();
+    });
+});
 
 function setzeHut(spielernummer){
     // Auswahl des Hutes

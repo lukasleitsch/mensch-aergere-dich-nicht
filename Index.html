@@ -12,6 +12,7 @@ and open the template in the editor.
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap/modal.js"></script>
     <script src="js/OrbitControls.js"></script>
+    <script src="js/tween.min.js"></script>
 
 
     <script type="text/javascript" src="js/spielfeld.js"></script>
@@ -153,6 +154,10 @@ and open the template in the editor.
       <button class="btn btn-default pause" ><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></button>
     </div>
 
+    <div class="wuerfeln">
+      <button class="btn btn-default wuerfeln">Würfeln</button>
+    </div>
+
   </body>
 
       <script>
@@ -202,18 +207,17 @@ and open the template in the editor.
       controlsWuerfel.addEventListener( 'change', renderWuerfel );
 
       var geometry = new THREE.BoxGeometry( 5, 5, 5 );
-      var material = new THREE.MeshBasicMaterial( {color: 0xFF0000} );
+      var material = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture("img/wuerfel.png") });
       var cube = new THREE.Mesh( geometry, material );
       sceneWuerfel.add( cube );
       
       // Loop-Funktion aufrufen
       var renderWuerfel = function() {
         requestAnimationFrame(renderWuerfel);
-
-
-        cube.rotation.x += 0.1;
+        //cube.rotation.x += 0.1;
 
         rendererWuerfel.render(sceneWuerfel, cameraWuerfel);
+        TWEEN.update();
       };
       renderWuerfel();
 
