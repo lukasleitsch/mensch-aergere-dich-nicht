@@ -11,6 +11,61 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/img\/drei.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 9467,
+		"inputAbbreviatedPath": "\/img\/drei.png",
+		"outputAbbreviatedPath": "\/img\/drei.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/eins.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 3553,
+		"inputAbbreviatedPath": "\/img\/eins.png",
+		"outputAbbreviatedPath": "\/img\/eins.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/fuenf.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 8143,
+		"inputAbbreviatedPath": "\/img\/fuenf.png",
+		"outputAbbreviatedPath": "\/img\/fuenf.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/sechs.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 10206,
+		"inputAbbreviatedPath": "\/img\/sechs.png",
+		"outputAbbreviatedPath": "\/img\/sechs.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/vier.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 4990,
+		"inputAbbreviatedPath": "\/img\/vier.png",
+		"outputAbbreviatedPath": "\/img\/vier.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/img\/wuerfel.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -18,6 +73,17 @@
 		"initialSize": 6651,
 		"inputAbbreviatedPath": "\/img\/wuerfel.png",
 		"outputAbbreviatedPath": "\/img\/wuerfel.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/img\/zwei.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 7957,
+		"inputAbbreviatedPath": "\/img\/zwei.png",
+		"outputAbbreviatedPath": "\/img\/zwei.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0

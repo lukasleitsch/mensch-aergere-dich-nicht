@@ -38,14 +38,40 @@ function wuerfeln(spielernummer){
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     return Math.floor((Math.random() * 6) + 1);
 }
+
+function rad(angle){
+    return (angle + 360*5) / 180 * Math.PI;
+}
 $(function() {
     $('button.wuerfeln').click(function(event) {
-        new TWEEN.Tween(cube.rotation).to({ y: 30, x: 30 }, 200).onUpdate(function(){
-            cube.rotation.y = this.y;
-            cube.rotation.x = this.x;
-        }).start();
+        var zahl = Math.floor((Math.random() * 6) + 1);
+        cube.rotation.x = 0;
+        cube.rotation.z = 0;
+
+        switch(zahl) {
+            case 1:
+                new TWEEN.Tween(cube.rotation).to({ x: rad(0), z: rad(90)}, 2000).start();
+                break;
+            case 2:
+                new TWEEN.Tween(cube.rotation).to({ x: rad(90), z: rad(0)}, 2000).start();
+                break;
+            case 3:
+                new TWEEN.Tween(cube.rotation).to({ x: rad(0), z: rad(0)}, 2000).start();
+                break;
+            case 4:
+                new TWEEN.Tween(cube.rotation).to({ x: rad(180), z: rad(0)}, 2000).start();
+                break;
+            case 5:
+                new TWEEN.Tween(cube.rotation).to({ x: rad(-90), z: rad(0)}, 2000).start();
+                break;
+            case 6:
+                new TWEEN.Tween(cube.rotation).to({ x: rad(0), z: rad(-90)}, 2000).start();
+                break;
+        }
     });
 });
+
+
 
 function setzeHut(spielernummer){
     // Auswahl des Hutes

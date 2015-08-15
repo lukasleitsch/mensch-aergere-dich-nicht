@@ -187,7 +187,7 @@ and open the template in the editor.
               
       // Setzt die Kamera an den beschrieben Ort
 
-      cameraWuerfel.position.set(2, 8, 10);
+      cameraWuerfel.position.set(8, 8, 8);
       cameraWuerfel.up.set( 0, 1, 0 );
       cameraWuerfel.lookAt(sceneWuerfel.position);
 
@@ -206,8 +206,18 @@ and open the template in the editor.
       controlsWuerfel.damping = 0.2;
       controlsWuerfel.addEventListener( 'change', renderWuerfel );
 
+      var imagePrefix = "img/";
+      var directions  = ["eins", "sechs", "drei", "vier", "fuenf", "zwei"];
+      var imageSuffix = ".png";
+   
+      var materialArray = [];
+      for (var i = 0; i < 6; i++)
+        materialArray.push( new THREE.MeshBasicMaterial({
+        map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] + imageSuffix )
+      }));
+
       var geometry = new THREE.BoxGeometry( 5, 5, 5 );
-      var material = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture("img/wuerfel.png") });
+      var material = new THREE.MeshFaceMaterial(materialArray);
       var cube = new THREE.Mesh( geometry, material );
       sceneWuerfel.add( cube );
       
