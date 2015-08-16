@@ -82,14 +82,23 @@ function wuerfeln(){
     }
 }
 
-
+function spielfeldDrehen(){
+    camera.target.position.copy( scene.position );
+    new TWEEN.Tween(camera.position).to({ x: 10, y: 10, z: 0}, 2000).easing(TWEEN.Easing.Elastic.InOut).start();
+    // camera.lookAt(scene.position);
+    console.log(camera);
+    // camera.position.set.y = 20;
+}
 
 $(function() {
     $('button.wuerfeln').click(function(event) {
         wuerfeln();
     });
-});
 
+    $('button.drehen').click(function(event) {
+        spielfeldDrehen();
+    });
+});
 
 
 function setzeHut(spielernummer){

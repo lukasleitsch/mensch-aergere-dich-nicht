@@ -58,7 +58,7 @@ function spielfigure(color, positionX, positionY) {
 var scene = new THREE.Scene();
 
 // Erstellt eine Kamera mit den Attributen
-var camera = new THREE.PerspectiveCamera(75,
+var camera = new THREE.PerspectiveCamera(55,
        window.innerWidth / window.innerHeight, 0.1, 1000);
    
 // Erstellt Lichter
@@ -79,7 +79,7 @@ renderer.shadowMapType = THREE.PCFShadowMap;
        
 // Setzt die Kamera an den beschrieben Ort
 function setzeKamera() {
- camera.position.set(10, 10, 0);
+ camera.position.set(0, 10, 10);
  camera.up.set( 0, 1, 0 );
  camera.lookAt(scene.position);
 }

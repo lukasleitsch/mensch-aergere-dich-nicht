@@ -67,6 +67,15 @@ body {
 	}
 }
 
+.drehen {
+	position: relative;
+	button {
+		position: absolute;
+		left: 50%;	
+		bottom: 10px;
+	}
+}
+
 #modal_wuerfeln .ergebnis {
 	position: absolute;
 	opacity: 0;

@@ -1570,6 +1570,28 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
+		},
+	"\/Screenshots\/20150816 - spielfeld.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 74533,
+		"inputAbbreviatedPath": "\/Screenshots\/20150816 - spielfeld.png",
+		"outputAbbreviatedPath": "\/Screenshots\/20150816 - spielfeld.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/Screenshots\/20150816 - wuerfel.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 61417,
+		"inputAbbreviatedPath": "\/Screenshots\/20150816 - wuerfel.png",
+		"outputAbbreviatedPath": "\/Screenshots\/20150816 - wuerfel.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		}
 	},
 "hooks": [
