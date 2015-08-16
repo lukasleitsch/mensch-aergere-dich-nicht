@@ -84,7 +84,7 @@ function setzeKamera() {
  camera.lookAt(scene.position);
 }
 
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize($(window).width()-3, $(window).height()-5);
 document.getElementById('spielfeld').appendChild(renderer.domElement );
 // document.body.appendChild(renderer.domElement);
 
