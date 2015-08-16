@@ -49,6 +49,7 @@ function spielfigure(color, positionX, positionY) {
     group.position.set(positionX, 0, positionY);
 
     scene.add(group);
+    return group;
 }
 
 // THREE.JS
