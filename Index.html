@@ -1,25 +1,11 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
   <head>
     <meta charset="utf-8" /> 
-    <title>Grafische Datenverarbeitung</title>
+    <title>Mensch ärgere Dich nicht - Grafische Datenverarbeitung</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-  <style>
-  #wuerfel {
-    padding: 0px;
-    position: fixed; /* fixed or static */
-    top: 0;
-    left: 0;
-    border: 1px solid black;
-}
-  </style>
     <div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -52,7 +38,18 @@ and open the template in the editor.
     </div>
 
 
-    <div id="wuerfel"></div>
+    <div class="modal fade" id="modal_wuerfeln" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div id="wuerfel"></div>
+              <div class="ergebnis"></div>   
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div id="spielfeld"></div>
 
 
@@ -67,6 +64,7 @@ and open the template in the editor.
   </body>
   <script src="js/three.min.js"></script>
   <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap/transition.js"></script>
   <script src="js/bootstrap/modal.js"></script>
   <script src="js/OrbitControls.js"></script>
   <script src="js/tween.min.js"></script>

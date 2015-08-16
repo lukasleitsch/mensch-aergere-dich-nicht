@@ -5709,3 +5709,10 @@ body {
     position: absolute;
     left: 10px;
     bottom: 10px; }
+
+#modal_wuerfeln .ergebnis {
+  position: absolute;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }

@@ -232,9 +232,9 @@ spielfelder[39].position.set(0, 0, -5);
 
 // Fuegt die Spielfelder der Szene hinzu
 for (var i = 0; i < spielfelder.length; i++) {
-spielfelder[i].castShadow = true;
-spielfelder[i].receiveShadow = true;
-scene.add(spielfelder[i]);
+  spielfelder[i].castShadow = true;
+  spielfelder[i].receiveShadow = true;
+  scene.add(spielfelder[i]);
 }
 
 /*
@@ -242,36 +242,36 @@ scene.add(spielfelder[i]);
 * der Farbe
 */
 for (var i = 0; i < 4; i++) {
-gewinnfelder[i] = new Array(4);
-hausfelder[i] = new Array(4);
+  gewinnfelder[i] = new Array(4);
+  hausfelder[i] = new Array(4);
 
-if (i === 0) {
-  for (var j = 0; j < 4; j++) {
-    gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialRot);
-    hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialRot);
+  if (i === 0) {
+    for (var j = 0; j < 4; j++) {
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialRot);
+      hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialRot);
+    }
   }
-}
-if (i === 1) {
-  for (var j = 0; j < 4; j++) {
-    gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
-    hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
+  if (i === 1) {
+    for (var j = 0; j < 4; j++) {
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
+      hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
 
+    }
   }
-}
-if (i === 2) {
-  for (var j = 0; j < 4; j++) {
-    gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
-    hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
+  if (i === 2) {
+    for (var j = 0; j < 4; j++) {
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
+      hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
 
+    }
   }
-}
-if (i === 3) {
-  for (var j = 0; j < 4; j++) {
-    gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
-    hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
+  if (i === 3) {
+    for (var j = 0; j < 4; j++) {
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
+      hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
 
+    }
   }
-}
 }
 
 // Positionen fuer Rot
@@ -315,12 +315,12 @@ gewinnfelder[3][2].position.set(0, 0, -2);
 gewinnfelder[3][3].position.set(0, 0, -1);
 
 for (var i = 0; i < 4; i++) {
-for (var j = 0; j < 4; j++) {
-  gewinnfelder[i][j].castShadow = true;
-  gewinnfelder[i][j].receiveShadow = true;
-  hausfelder[i][j].castShadow = true;
-  hausfelder[i][j].receiveShadow = true;
-  scene.add(gewinnfelder[i][j]);
-  scene.add(hausfelder[i][j]);
-}
+  for (var j = 0; j < 4; j++) {
+    gewinnfelder[i][j].castShadow = true;
+    gewinnfelder[i][j].receiveShadow = true;
+    hausfelder[i][j].castShadow = true;
+    hausfelder[i][j].receiveShadow = true;
+    scene.add(gewinnfelder[i][j]);
+    scene.add(hausfelder[i][j]);
+  }
 }
