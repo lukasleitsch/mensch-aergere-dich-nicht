@@ -12,7 +12,6 @@ var run = true;                         //Abbruchbedingung
  * Beendet wird es durch einen Sieg oder durch beenden (run = false)
  */
 function beginneSpiel(anzahl){
-    erstelleSpielfeld();
     initialisiereSpieler();
     rotateCamera((-90 * Math.PI / 180));
     if (anzahl <= 2 && anzahl >= 4){
@@ -45,27 +44,28 @@ function rad(angle){
 $(function() {
     $('button.wuerfeln').click(function(event) {
         var zahl = Math.floor((Math.random() * 6) + 1);
-        cube.rotation.x = 0;
-        cube.rotation.z = 0;
+        wuerfelCube.rotation.x = 0;
+        wuerfelCube.rotation.y = 0;
+        wuerfelCube.rotation.z = 0;
 
         switch(zahl) {
             case 1:
-                new TWEEN.Tween(cube.rotation).to({ x: rad(0), z: rad(90)}, 2000).start();
+                new TWEEN.Tween(wuerfelCube.rotation).to({ x: rad(0), z: rad(90), y: rad(0)}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
                 break;
             case 2:
-                new TWEEN.Tween(cube.rotation).to({ x: rad(90), z: rad(0)}, 2000).start();
+                new TWEEN.Tween(wuerfelCube.rotation).to({ x: rad(90), z: rad(0), y: rad(0)}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
                 break;
             case 3:
-                new TWEEN.Tween(cube.rotation).to({ x: rad(0), z: rad(0)}, 2000).start();
+                new TWEEN.Tween(wuerfelCube.rotation).to({ x: rad(0), z: rad(0), y: rad(0)}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
                 break;
             case 4:
-                new TWEEN.Tween(cube.rotation).to({ x: rad(180), z: rad(0)}, 2000).start();
+                new TWEEN.Tween(wuerfelCube.rotation).to({ x: rad(180), z: rad(0), y: rad(0)}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
                 break;
             case 5:
-                new TWEEN.Tween(cube.rotation).to({ x: rad(-90), z: rad(0)}, 2000).start();
+                new TWEEN.Tween(wuerfelCube.rotation).to({ x: rad(-90), z: rad(0), y: rad(0)}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
                 break;
             case 6:
-                new TWEEN.Tween(cube.rotation).to({ x: rad(0), z: rad(-90)}, 2000).start();
+                new TWEEN.Tween(wuerfelCube.rotation).to({ x: rad(0), z: rad(-90), y: rad(0)}, 2000).easing(TWEEN.Easing.Elastic.Out).start();
                 break;
         }
     });

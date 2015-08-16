@@ -8,18 +8,6 @@ and open the template in the editor.
   <head>
     <meta charset="utf-8" /> 
     <title>Grafische Datenverarbeitung</title>
-    <script src="js/three.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap/modal.js"></script>
-    <script src="js/OrbitControls.js"></script>
-    <script src="js/tween.min.js"></script>
-
-
-    <script type="text/javascript" src="js/spielfeld.js"></script>
-    <script type="text/javascript" src="js/spieler.js"></script>
-    <script type="text/javascript" src="js/menue.js"></script>
-    <script type="text/javascript" src="js/steuerung.js"></script>
-
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
@@ -32,95 +20,12 @@ and open the template in the editor.
     border: 1px solid black;
 }
   </style>
-    <script>
-      // Erstellt die Scene auf der "gearbeitet" wird
-      var scene = new THREE.Scene();
-
-      // Erstellt eine Kamera mit den Attributen
-      var camera = new THREE.PerspectiveCamera(75,
-              window.innerWidth / window.innerHeight, 0.1, 1000);
-          
-      // Erstellt Lichter
-      var ambientLight = new THREE.AmbientLight(0x404040);
-      var directionalLight = new THREE.DirectionalLight(0xdfebff);
-
-      
-      // Erstellt den Renderer
-      var renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-      });
-
-      renderer.shadowMapEnabled = true;   
-      renderer.shadowMapSoft = true;
-      renderer.shadowMapType = THREE.PCFShadowMap;
-
-              
-      // Setzt die Kamera an den beschrieben Ort
-      function setzeKamera() {
-        camera.position.set(10, 10, 0);
-        camera.up.set( 0, 1, 0 );
-        camera.lookAt(scene.position);
-      }
-      
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      document.body.appendChild(renderer.domElement);
-      
-      // Richtungslicht nach oben setzen
-      directionalLight.position.set(80, 100, 80);
-
-      directionalLight.castShadow = true;
-      directionalLight.shadowCameraVisible = false;
-
-      directionalLight.shadowMapWidth = 4096;
-      directionalLight.shadowMapHeight = 4096;
-
-      var d = 11;
-
-      directionalLight.shadowCameraLeft = -d;
-      directionalLight.shadowCameraRight = d;
-      directionalLight.shadowCameraTop = d;
-      directionalLight.shadowCameraBottom = -d;
-
-      directionalLight.shadowCameraFar = 200;
-      directionalLight.shadowDarkness = 0.2;
-
-      // Licher der Scene hinzufuegen
-      scene.add(directionalLight);
-      scene.add(ambientLight);
-      
-      // Setzt die Kamera in Position
-      setzeKamera();
-      
-      scene.add(camera);
-
-      // Maussteuerung
-
-      controls = new THREE.OrbitControls( camera );
-      controls.damping = 0.2;
-      controls.addEventListener( 'change', render );
-      
-      // Loop-Funktion aufrufen
-      var render = function() {
-        requestAnimationFrame(render);
-
-        renderer.render(scene, camera);
-      };
-      render();
-  
-      // Beginnt das Spiel
-      beginneSpiel(4);
-    </script>
-
-
-
-
     <div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Mensch �rgere Dich nicht</h4>
+            <h4 class="modal-title" id="myModalLabel">Mensch ärgere Dich nicht</h4>
           </div>
           <div class="modal-body">
             <div class="anzahl_spieler">
@@ -139,7 +44,7 @@ and open the template in the editor.
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Schlie�en</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
             <button type="button" class="btn btn-primary" id="menue_speichern">Speichern</button>
           </div>
         </div>
@@ -148,6 +53,7 @@ and open the template in the editor.
 
 
     <div id="wuerfel"></div>
+    <div id="spielfeld"></div>
 
 
     <div class="pause">
@@ -159,78 +65,16 @@ and open the template in the editor.
     </div>
 
   </body>
-
-      <script>
-      // Würfel
-      // Erstellt die Scene auf der "gearbeitet" wird
-      var sceneWuerfel = new THREE.Scene();
-
-      // Erstellt eine Kamera mit den Attributen
-      var cameraWuerfel = new THREE.PerspectiveCamera(75,
-              window.innerWidth / window.innerHeight, 0.1, 1000);
-          
-      // Erstellt Lichter
-      var ambientLight = new THREE.AmbientLight(0x404040);
-      var directionalLight = new THREE.DirectionalLight(0xdfebff);
-
-      
-      // Erstellt den Renderer
-      var rendererWuerfel = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-      });
-
-      rendererWuerfel.shadowMapEnabled = true;   
-      rendererWuerfel.shadowMapSoft = true;
-      rendererWuerfel.shadowMapType = THREE.PCFShadowMap;
-
-              
-      // Setzt die Kamera an den beschrieben Ort
-
-      cameraWuerfel.position.set(8, 8, 8);
-      cameraWuerfel.up.set( 0, 1, 0 );
-      cameraWuerfel.lookAt(sceneWuerfel.position);
-
-      
-      rendererWuerfel.setSize(400, 300);
-      document.getElementById('wuerfel').appendChild( rendererWuerfel.domElement );
-      
-      sceneWuerfel.add(ambientLight);
-      
-      
-      sceneWuerfel.add(cameraWuerfel);
-
-      // Maussteuerung
-
-      controlsWuerfel = new THREE.OrbitControls( cameraWuerfel );
-      controlsWuerfel.damping = 0.2;
-      controlsWuerfel.addEventListener( 'change', renderWuerfel );
-
-      var imagePrefix = "img/";
-      var directions  = ["eins", "sechs", "drei", "vier", "fuenf", "zwei"];
-      var imageSuffix = ".png";
-   
-      var materialArray = [];
-      for (var i = 0; i < 6; i++)
-        materialArray.push( new THREE.MeshBasicMaterial({
-        map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] + imageSuffix )
-      }));
-
-      var geometry = new THREE.BoxGeometry( 5, 5, 5 );
-      var material = new THREE.MeshFaceMaterial(materialArray);
-      var cube = new THREE.Mesh( geometry, material );
-      sceneWuerfel.add( cube );
-      
-      // Loop-Funktion aufrufen
-      var renderWuerfel = function() {
-        requestAnimationFrame(renderWuerfel);
-        //cube.rotation.x += 0.1;
-
-        rendererWuerfel.render(sceneWuerfel, cameraWuerfel);
-        TWEEN.update();
-      };
-      renderWuerfel();
+  <script src="js/three.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap/modal.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="js/tween.min.js"></script>
 
 
-    </script>
+  <script type="text/javascript" src="js/wuerfel.js"></script>
+  <script type="text/javascript" src="js/spielfeld.js"></script>
+  <script type="text/javascript" src="js/spieler.js"></script>
+  <script type="text/javascript" src="js/menue.js"></script>
+  <script type="text/javascript" src="js/steuerung.js"></script>
 </html>
