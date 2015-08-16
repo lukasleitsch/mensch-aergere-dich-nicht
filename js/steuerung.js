@@ -75,7 +75,7 @@ function wuerfeln(){
         }).animate({
            opacity: 0.7,
            fontSize: "28em",
-         }, 1000).delay(1000).fadeOut('fast', function(){
+         }, 1000).delay(1000).queue(function(){
             $('#modal_wuerfeln').modal('hide');
          })
        
