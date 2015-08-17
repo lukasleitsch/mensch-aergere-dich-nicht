@@ -127,7 +127,9 @@ spielerGelb.figure3 = spielfigure(spielerGelb.farbe, spielerGelb.haus3.x, spiele
 spielerGelb.figure4 = spielfigure(spielerGelb.farbe, spielerGelb.haus4.x, spielerGelb.haus4.y);
 
 $(function(){
-	new TWEEN.Tween(spielerGelb.figure1.position).to(spielfelder[spielerGelb.start].position, 2000).easing(TWEEN.Easing.Elastic.InOut).delay(2000).start();
+	new TWEEN.Tween(spielerGelb.figure1.position).to(spielfelder[spielerGelb.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut).start();
+        spielerGelb.figure1.aktuellePos = spielerGelb.start;
+        console.log(spielerGelb.figure1.aktuellePos);
 })
 
 

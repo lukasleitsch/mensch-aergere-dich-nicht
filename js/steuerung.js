@@ -78,7 +78,6 @@ function wuerfeln(){
          }, 1000).delay(1000).fadeOut('fast', function(){
             $('#modal_wuerfeln').modal('hide');
          })
-       
     }
 }
 
@@ -96,14 +95,29 @@ $(function() {
     });
 
     $('button.drehen').click(function(event) {
-        spielfeldDrehen();
+        setzeHut(spielerGelb, 5);
     });
 });
 
 
-function setzeHut(spielernummer){
-    // Auswahl des Hutes
-    // Setzen des ausgew√§hlten Hutes
+function setzeHut(spieler, zahl){ 
+    if(!spieler.figure1.aktuellePos){
+        console.log("Aktuelle Position nicht gesetzt!");
+    }
+    else{
+        var tween = new Array(zahl);
+        for( var i = 0; i < zahl; i++){
+            //Erstellt die einzelnen Animationen
+            tween[i] = new TWEEN.Tween(spieler.figure1.position).to(spielfelder[(spieler.figure1.aktuellePos + 39) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
+            //Weiﬂt das naechste Feld zu
+            spieler.figure1.aktuellePos = (spieler.figure1.aktuellePos + 39) % spielfelder.length;
+        } 
+     
+        for( var i = 0; i < zahl - 1; i++){
+            tween[i].chain(tween[i+1]);
+        }
+        tween[0].start();
+    }
 }
 
 /*
@@ -121,3 +135,16 @@ function rotateCamera() {
 
 }
 
+function sleep(length)
+  {
+    var start=(new Date()).getTime();
+    var now;
+    while(true)
+      {
+        now=(new Date()).getTime();
+        if(now-start>length)
+          {
+            break;
+          }
+      }
+  }
