@@ -161,17 +161,3 @@ function pruefeFertig(){
 function rotateCamera() {
 
 }
-
-function sleep(length)
-  {
-    var start=(new Date()).getTime();
-    var now;
-    while(true)
-      {
-        now=(new Date()).getTime();
-        if(now-start>length)
-          {
-            break;
-          }
-      }
-  }
