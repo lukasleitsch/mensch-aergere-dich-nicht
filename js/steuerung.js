@@ -81,12 +81,38 @@ function wuerfeln(){
     }
 }
 
+var count = 0;
 function spielfeldDrehen(){
-    camera.target.position.copy( scene.position );
-    new TWEEN.Tween(camera.position).to({ x: 10, y: 10, z: 0}, 2000).easing(TWEEN.Easing.Elastic.InOut).start();
-    // camera.lookAt(scene.position);
-    console.log(camera);
-    // camera.position.set.y = 20;
+
+    function KameraDrehen(x, y, z){
+        new TWEEN.Tween (camera.position)
+                .to ({ x: x, y: y, z: z}, 2000)
+                .easing(TWEEN.Easing.Quartic.InOut)
+                .onUpdate(function () {
+                    camera.lookAt(scene.position);
+                }).onComplete(function () {
+                    camera.lookAt(scene.position);
+                }).start()
+    }
+
+    switch(count) {
+        case 0:
+            KameraDrehen(10,10,0);
+            count++;
+            break;        
+        case 1:
+            KameraDrehen(0,10,-10);
+            count++;
+            break;        
+        case 2:
+            KameraDrehen(-10,10,0);
+            count++;
+            break;        
+        case 3:
+            KameraDrehen(0,10,10);
+            count = 0;
+            break;
+    }
 }
 
 $(function() {
@@ -95,7 +121,8 @@ $(function() {
     });
 
     $('button.drehen').click(function(event) {
-        setzeHut(spielerGelb, 5);
+        //setzeHut(spielerGelb, 5);
+        spielfeldDrehen();
     });
 });
 

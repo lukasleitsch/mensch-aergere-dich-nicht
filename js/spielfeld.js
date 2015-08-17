@@ -79,7 +79,7 @@ renderer.shadowMapType = THREE.PCFShadowMap;
        
 // Setzt die Kamera an den beschrieben Ort
 function setzeKamera() {
- camera.position.set(0, 10, 10);
+ camera.position.set(0, 11, 10);
  camera.up.set( 0, 1, 0 );
  camera.lookAt(scene.position);
 }
