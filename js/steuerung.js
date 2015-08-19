@@ -12,10 +12,6 @@ var counter = 0;
  * Beendet wird es durch einen Sieg oder durch beenden (run = false)
  */
 function wechsleSpieler(){
-    //Bedinung pruefen ob Spiel beendet ist
-    if (pruefeFertig()){
-        run = !run;
-    }
     counter = 0;
     spielernummer = (spielernummer + 1) % 4;
     spielfeldDrehen(spielernummer);
@@ -98,19 +94,15 @@ function spielfeldDrehen(count){
     switch(count) {
         case 0:
             KameraDrehen(10,10,0);
-            count++;
             break;        
         case 1:
             KameraDrehen(0,10,-10);
-            count++;
             break;        
         case 2:
             KameraDrehen(-10,10,0);
-            count++;
             break;        
         case 3:
             KameraDrehen(0,10,10);
-            count = 0;
             break;
     }
 }
@@ -121,11 +113,6 @@ function spielfeldDrehen(count){
 $(function() {
     $('button.wuerfeln').click(function(event) {
         wuerfeln();
-    });
-
-    $('button.drehen').click(function(event) {
-        //setzeHut(spielerGelb, 5);
-        spielfeldDrehen();
     });
 });
 
@@ -194,13 +181,6 @@ function setzeHut(spielernummer, zahl){
     }
 }
 
-/*
- * Prueft ob das Spiel beendet ist. Das Spiel ist beendet sobald nurnoch 1 Spieler
- * seine Huete auf dem Spielfeld hat, waehrend die Mitspieler ihrer im Ziel haben.
- */
-function pruefeFertig(){
-
-}
 
 function rauswerfen(feldnummer){
     //Ermittle Spieler und Figur

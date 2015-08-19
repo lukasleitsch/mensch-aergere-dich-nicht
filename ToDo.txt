@@ -1,10 +1,6 @@
-Für das erstellen der Spielerobjekte:
-in der Datei steuerung.js muss die Funktion "initialisiereSpieler(param) aufgerufen werden
-geschieht, sobald die Spieler gewählt haben (Namen sind optional später eventuell hinzuzufügen)
-Ablauf: Spieler wählen Farbe -> Bestätigen -> Spieler werden initialisiert -> Bestätigung durch true -> Menü verschwindet
-Aufrufparameter für initialisiereSpieler:
-anzahl[] : Anzahl der Mitspieler (2-4 möglich)(Spieler entspricht Arrayplatz + 1)
-farbe[] : Farbe des Spielers (Spieler entspricht Arrayplatz + 1)
-name[] : Name des Spielers (Spieler entspricht Arrayplatz + 1)
+#ToDo
 
-am Anfang können als Spielernamen Feste Werte übergeben werden (Player1, Player2...)
+- Bis zu vier Hüttchen von jedem Spieler im Spielfeld
+- Hover-Effekt auf Hüttchen mögliche Spielfelder hervorheben (Lukas)
+- Figuren ins Haus
+- Konfliktlösung, wenn Figur im Weg

@@ -1592,6 +1592,28 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
+		},
+	"\/Screenshots\/20150819 - HueteAmFeld.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 514638,
+		"inputAbbreviatedPath": "\/Screenshots\/20150819 - HueteAmFeld.jpg",
+		"outputAbbreviatedPath": "\/Screenshots\/20150819 - HueteAmFeld.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/Screenshots\/20150819 - Wuerfelvorgang.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 476333,
+		"inputAbbreviatedPath": "\/Screenshots\/20150819 - Wuerfelvorgang.jpg",
+		"outputAbbreviatedPath": "\/Screenshots\/20150819 - Wuerfelvorgang.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
 		}
 	},
 "hooks": [
