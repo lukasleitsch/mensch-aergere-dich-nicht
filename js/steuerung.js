@@ -4,29 +4,21 @@
  */
 
 //Globale Variablen
-var spieler = new Array(4);             //Spielerobjekte
-var run = true;                         //Abbruchbedingung
+var spielernummer = 3;                  //Pointer auf Spieler
+var counter = 0;
 
 /*
  * Startet und initialisiert das Spiel
  * Beendet wird es durch einen Sieg oder durch beenden (run = false)
  */
-function beginneSpiel(anzahl){
-    rotateCamera((-90 * Math.PI / 180));
-    if (anzahl <= 2 && anzahl >= 4){
-        throw "Fehler, bitte erneut Versuchen.";
+function wechsleSpieler(){
+    //Bedinung pruefen ob Spiel beendet ist
+    if (pruefeFertig()){
+        run = !run;
     }
-    var spielernummer = 0;
-    while(run){
-        if (spieler[spielernummer].aufFeld != 0 || spieler[spielernummer].imHaus != 0){
-            //Ruft erst Wuerfeln auf, dann Setzen mit der entsprechend gewuerfeltet Augenzahl
-            setzen(spielernummer, wuerfeln(spielernummer));
-        }
-        spielernummer = (spielernummer + 1) % anzahl;
-        if (pruefeFertig()){
-            run = !run;
-        }
-    }
+    counter = 0;
+    spielernummer = (spielernummer + 1) % 4;
+    spielfeldDrehen(spielernummer);
 }
 
 /*
@@ -79,10 +71,18 @@ function wuerfeln(){
             $('#modal_wuerfeln').modal('hide');
          })
     }
+    //Verzögerung zu Testzwecken
+    setTimeout(function(){
+        setzeHut(spielernummer, zahl);
+    }, 5000);
 }
 
-var count = 0;
-function spielfeldDrehen(){
+/*
+ * Dreht das Spielfeld bzw. die Kamera um einen Wert entsprechend der Spieler-
+ * anzahl und der Spielerverteilung
+ * @param {int} count
+ */
+function spielfeldDrehen(count){
 
     function KameraDrehen(x, y, z){
         new TWEEN.Tween (camera.position)
@@ -115,6 +115,9 @@ function spielfeldDrehen(){
     }
 }
 
+/*
+ * Startet ein Event wenn man den Button 'Würfeln' drueckt
+ */
 $(function() {
     $('button.wuerfeln').click(function(event) {
         wuerfeln();
@@ -126,10 +129,26 @@ $(function() {
     });
 });
 
-
-function setzeHut(spieler, zahl){ 
+/*
+ * Die Funktion ermoeglicht es den Spieler sein Huetchen anhand der gewuerfelten
+ * Zahl ein Huetchen zu setzen
+ * 
+ * @param {int} spielernummer
+ */
+function setzeHut(spielernummer, zahl){
+    //Wandelt aus Spielernummer das Spielerobjekt
+    var spieler = spielerArr[spielernummer];
+    //Prueft ob es ein aktives Huetchen gibt
     if(!spieler.figure1.aktuellePos){
-        console.log("Aktuelle Position nicht gesetzt!");
+        //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
+        if(counter < 3 && zahl === 6){
+            new TWEEN.Tween(spieler.figure1.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut).start();
+            spieler.figure1.aktuellePos = spieler.start; 
+        }
+        counter++;
+        if(counter === 3 && zahl !== 6){
+            wechsleSpieler();
+        }
     }
     else{
         var tween = new Array(zahl);
@@ -142,9 +161,16 @@ function setzeHut(spieler, zahl){
      
         for( var i = 0; i < zahl - 1; i++){
             tween[i].chain(tween[i+1]);
+            
+            if(i === zahl - 2 && zahl !== 6){
+                tween[i + 1].onComplete(function() {
+                    wechsleSpieler();
+                })
+            }
         }
         tween[0].start();
     }
+ 
 }
 
 /*
@@ -152,12 +178,5 @@ function setzeHut(spieler, zahl){
  * seine Huete auf dem Spielfeld hat, waehrend die Mitspieler ihrer im Ziel haben.
  */
 function pruefeFertig(){
-
-}
-
-/*
- * Animiert die Kamerabewegung um 90Â° im Uhrzeigersinn
- */
-function rotateCamera() {
 
 }

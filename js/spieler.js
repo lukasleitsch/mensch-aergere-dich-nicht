@@ -1,3 +1,4 @@
+var spielerArr = new Array(4);             //Spielerobjekte
 // Initialisiere SpielerRot
 var spielerRot = {
 	aktiv: "",
@@ -30,6 +31,8 @@ spielerRot.figure3 = spielfigure(spielerRot.farbe, spielerRot.haus3.x, spielerRo
 spielerRot.figure4 = spielfigure(spielerRot.farbe, spielerRot.haus4.x, spielerRot.haus4.y);
 //spielfigure(spielerRot.farbe, -5, -1);
 
+spielerArr[0] = spielerRot;
+
 // Initialisiere SpielerBlau
 var spielerBlau = {
 	aktiv: "",
@@ -60,6 +63,8 @@ spielerBlau.figure1 = spielfigure(spielerBlau.farbe, spielerBlau.haus1.x, spiele
 spielerBlau.figure2 = spielfigure(spielerBlau.farbe, spielerBlau.haus2.x, spielerBlau.haus2.y);
 spielerBlau.figure3 = spielfigure(spielerBlau.farbe, spielerBlau.haus3.x, spielerBlau.haus3.y);
 spielerBlau.figure4 = spielfigure(spielerBlau.farbe, spielerBlau.haus4.x, spielerBlau.haus4.y);
+
+spielerArr[1] = spielerBlau;
 
 
 // Initialisiere SpielerGruen
@@ -94,6 +99,7 @@ spielerGruen.figure2 = spielfigure(spielerGruen.farbe, spielerGruen.haus2.x, spi
 spielerGruen.figure3 = spielfigure(spielerGruen.farbe, spielerGruen.haus3.x, spielerGruen.haus3.y);
 spielerGruen.figure4 = spielfigure(spielerGruen.farbe, spielerGruen.haus4.x, spielerGruen.haus4.y);
 
+spielerArr[2] = spielerGruen;
 
 // Initialisiere SpielerRot
 var spielerGelb = {
@@ -126,10 +132,4 @@ spielerGelb.figure2 = spielfigure(spielerGelb.farbe, spielerGelb.haus2.x, spiele
 spielerGelb.figure3 = spielfigure(spielerGelb.farbe, spielerGelb.haus3.x, spielerGelb.haus3.y);
 spielerGelb.figure4 = spielfigure(spielerGelb.farbe, spielerGelb.haus4.x, spielerGelb.haus4.y);
 
-$(function(){
-	new TWEEN.Tween(spielerGelb.figure1.position).to(spielfelder[spielerGelb.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut).start();
-        spielerGelb.figure1.aktuellePos = spielerGelb.start;
-        console.log(spielerGelb.figure1.aktuellePos);
-})
-
-
+spielerArr[3] = spielerGelb;
