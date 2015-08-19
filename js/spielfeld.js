@@ -130,12 +130,6 @@ var render = function() {
 };
 render();
 
-// Beginnt das Spiel
-//beginneSpiel(4);
-
-
-// END THREE.JS
-
 /*
  * Erstellt das Spielfeld mit Huetchen im 'Haus'
  */

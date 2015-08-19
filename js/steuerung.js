@@ -142,8 +142,15 @@ function setzeHut(spielernummer, zahl){
     if(!spieler.figure1.aktuellePos){
         //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
         if(counter < 3 && zahl === 6){
-            new TWEEN.Tween(spieler.figure1.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut).start();
-            spieler.figure1.aktuellePos = spieler.start; 
+            var setzen = new TWEEN.Tween(spieler.figure1.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut);
+            spieler.figure1.aktuellePos = spieler.start;
+            if(spielfelder[spieler.figure1.aktuellePos].besetzt){
+                rauswerfen(spieler.figure1.aktuellePos).chain(setzen).start();
+            }
+            else{
+                setzen.start();
+            }
+            spielfelder[spieler.figure1.aktuellePos].besetzt = spieler.figure1;
         }
         counter++;
         if(counter === 3 && zahl !== 6){
@@ -151,26 +158,40 @@ function setzeHut(spielernummer, zahl){
         }
     }
     else{
-        var tween = new Array(zahl);
-        for( var i = 0; i < zahl; i++){
+        var tween;
+        //Erstellt ein Array mit der Anzahl benötigter Animationen
+        delete spielfelder[spieler.figure1.aktuellePos].besetzt;
+        if(spielfelder[(spieler.figure1.aktuellePos + 40 - zahl) % spielfelder.length].besetzt){
+            tween = new Array(zahl + 1);
+        }
+        else{
+            tween = new Array(zahl);            
+        }
+        //Initialisiert die Animationen fuer jedes Feld
+        for( var i = 0; i < tween.length; i++){
             //Erstellt die einzelnen Animationen
             tween[i] = new TWEEN.Tween(spieler.figure1.position).to(spielfelder[(spieler.figure1.aktuellePos + 39) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
             //Weißt das naechste Feld zu
             spieler.figure1.aktuellePos = (spieler.figure1.aktuellePos + 39) % spielfelder.length;
-        } 
-     
-        for( var i = 0; i < zahl - 1; i++){
-            tween[i].chain(tween[i+1]);
-            
-            if(i === zahl - 2 && zahl !== 6){
-                tween[i + 1].onComplete(function() {
-                    wechsleSpieler();
-                })
+            if(tween.length > zahl && i === zahl - 2){
+                tween[i + 1] = rauswerfen((spieler.figure1.aktuellePos + 39) % spielfelder.length);
+                i = i + 1;
             }
+        } 
+        //Verkettet die Animationen
+        for( var i = 0; i < tween.length - 1; i++){
+            tween[i].chain(tween[i+1]);    
         }
-        tween[0].start();
+        //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
+        if(zahl !== 6){
+            tween[tween.length - 1].onComplete(function() {
+                    wechsleSpieler();
+            });
+        }
+        //Startet die Animationen und den Setzvorgang
+        tween[0].start()
+        spielfelder[spieler.figure1.aktuellePos].besetzt = spieler.figure1;
     }
- 
 }
 
 /*
@@ -179,4 +200,14 @@ function setzeHut(spielernummer, zahl){
  */
 function pruefeFertig(){
 
+}
+
+function rauswerfen(feldnummer){
+    //Ermittle Spieler und Figur
+    var spielerFigur = spielfelder[feldnummer].besetzt;
+    //Animation zum Hausfeld
+    var rauswurf = new TWEEN.Tween(spielerFigur.position).to(spielerFigur.hausfeld.position, 1000).easing(TWEEN.Easing.Elastic.InOut);
+    //Loesche Aktivitaet
+    delete spielerFigur.aktuellePos;
+    return rauswurf;
 }
