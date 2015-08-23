@@ -5,6 +5,7 @@
 var spielfelder = new Array(40);
 var gewinnfelder = new Array(4);
 var hausfelder = new Array(4);
+var spielfiguren = new THREE.Object3D();
 
 // Variablen und Werte fuer die Spielfelder
 var radius = 0.35;
@@ -47,8 +48,8 @@ function spielfigure(color, positionX, positionY) {
 
     group.add(sphere);
     group.position.set(positionX, 0, positionY);
+    spielfiguren.add(group);
 
-    scene.add(group);
     return group;
 }
 
@@ -116,19 +117,53 @@ setzeKamera();
 
 scene.add(camera);
 
+// Spielfiguren der Scene hinzufügen
+
+scene.add(spielfiguren);
+
 // Maussteuerung
 
 controls = new THREE.OrbitControls( camera );
 controls.damping = 0.2;
 controls.addEventListener( 'change', render );
 
+// Mouse Over für Spielfiguren
+
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
+
+function onMouseMove( event ) {
+
+  // calculate mouse position in normalized device coordinates
+  // (-1 to +1) for both components
+
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;  
+
+
+  // update the picking ray with the camera and mouse position 
+  raycaster.setFromCamera( mouse, camera ); 
+
+   // calculate objects intersecting the picking ray
+   var intersects = raycaster.intersectObjects( spielfiguren.children, true );
+
+   if(intersects.length) {
+
+     console.log(Math.round(intersects[ 0 ].point.x));
+     console.log(Math.round(intersects[ 0 ].point.z));
+   }
+}
+
 // Loop-Funktion aufrufen
 var render = function() {
  requestAnimationFrame(render);
-
  renderer.render(scene, camera);
 };
+
 render();
+
+window.addEventListener( 'mousemove', onMouseMove, false );
+
 
 /*
  * Erstellt das Spielfeld mit Huetchen im 'Haus'
