@@ -108,6 +108,30 @@ directionalLight.shadowCameraBottom = -d;
 directionalLight.shadowCameraFar = 200;
 directionalLight.shadowDarkness = 0.2;
 
+// white spotlight shining from the side, casting shadow
+
+var spotLight = new THREE.SpotLight( 0xFBB829,1 );
+spotLight.position.set( 4.5, 5, 4.5 );
+// var targetSpotLight = new THREE.Object3D();
+// targetSpotLight.position.set(-5, 0, -5);
+// spotLight.target = targetSpotLight;
+
+spotLight.target.position.set(-50, 0, 100);
+
+console.log(spotLight);
+
+spotLight.castShadow = true;
+spotLight.shadowCameraVisible = true;
+
+spotLight.shadowMapWidth = 1024;
+spotLight.shadowMapHeight = 1024;
+
+spotLight.shadowCameraNear = 1;
+spotLight.shadowCameraFar = 5;
+spotLight.shadowCameraFov = 10;
+
+// scene.add( spotLight );
+
 // Licher der Scene hinzufuegen
 scene.add(directionalLight);
 scene.add(ambientLight);
@@ -149,8 +173,12 @@ function onMouseMove( event ) {
 
    if(intersects.length) {
 
+
+    spielfelder[4].material.color.setHex( 0xFF4C4C); 
      console.log(Math.round(intersects[ 0 ].point.x));
      console.log(Math.round(intersects[ 0 ].point.z));
+   } else {
+    spielfelder[4].material.color.setHex(0xffffff); 
    }
 }
 
@@ -186,10 +214,7 @@ scene.add(cube);
 * felder kommen.
 */
 var cylinderGeometry = new THREE.CylinderGeometry(radius, radius, 0.2, segmente);
-// Material fuer Spielfelder
-var materialCylinder = new THREE.MeshPhongMaterial({
-color: 0xFFFFFF
-});
+
 // Materialfarbe fuer Spieler Gelb
 var materialGelb = new THREE.MeshPhongMaterial({
 color: 0xFFFC00
@@ -212,7 +237,9 @@ color: 0xFF0000
 * der normalen Spielfelder hinzu
 */
 for (var i = 0; i < spielfelder.length; i++) {
-spielfelder[i] = new THREE.Mesh(cylinderGeometry, materialCylinder);
+spielfelder[i] = new THREE.Mesh(cylinderGeometry, new THREE.MeshPhongMaterial({
+color: 0xFFFFFF
+}));
 }
 
 /*
@@ -259,6 +286,8 @@ spielfelder[36].position.set(1, 0, -3);
 spielfelder[37].position.set(1, 0, -4);
 spielfelder[38].position.set(1, 0, -5);
 spielfelder[39].position.set(0, 0, -5);
+
+console.log(spielfelder[39]);
 
 // Fuegt die Spielfelder der Szene hinzu
 for (var i = 0; i < spielfelder.length; i++) {

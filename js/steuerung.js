@@ -4,8 +4,9 @@
  */
 
 //Globale Variablen
-var spielernummer = 3;                  //Pointer auf Spieler
+var spielernummer = 0;                  //Pointer auf Spieler
 var counter = 0;
+var anzahlSpieler = 4;
 
 /*
  * Startet und initialisiert das Spiel
@@ -13,7 +14,7 @@ var counter = 0;
  */
 function wechsleSpieler(){
     counter = 0;
-    spielernummer = (spielernummer + 1) % 4;
+    spielernummer = (spielernummer + 1) % anzahlSpieler;
     spielfeldDrehen(spielernummer);
 }
 
@@ -25,7 +26,8 @@ function wuerfeln(){
         return (angle + 360*5) / 180 * Math.PI;
     }
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
-    var zahl = Math.floor((Math.random() * 6) + 1);
+    // var zahl = Math.floor((Math.random() * 6) + 1);
+    var zahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
@@ -93,16 +95,16 @@ function spielfeldDrehen(count){
 
     switch(count) {
         case 0:
-            KameraDrehen(10,10,0);
+            KameraDrehen(0,10,10);
             break;        
         case 1:
-            KameraDrehen(0,10,-10);
-            break;        
-        case 2:
             KameraDrehen(-10,10,0);
             break;        
+        case 2:
+            KameraDrehen(0,10,-10);
+            break;        
         case 3:
-            KameraDrehen(0,10,10);
+            KameraDrehen(10,10,0);
             break;
     }
 }
@@ -133,8 +135,7 @@ function setzeHut(spielernummer, zahl){
             spieler.figure1.aktuellePos = spieler.start;
             if(spielfelder[spieler.figure1.aktuellePos].besetzt){
                 rauswerfen(spieler.figure1.aktuellePos).chain(setzen).start();
-            }
-            else{
+            }else{
                 setzen.start();
             }
             spielfelder[spieler.figure1.aktuellePos].besetzt = spieler.figure1;
@@ -143,16 +144,14 @@ function setzeHut(spielernummer, zahl){
         if(counter === 3 && zahl !== 6){
             wechsleSpieler();
         }
-    }
-    else{
+    }else{
         var tween;
         //Erstellt ein Array mit der Anzahl benötigter Animationen
         delete spielfelder[spieler.figure1.aktuellePos].besetzt;
         if(spielfelder[(spieler.figure1.aktuellePos + 40 - zahl) % spielfelder.length].besetzt){
             tween = new Array(zahl + 1);
-        }
-        else{
-            tween = new Array(zahl);            
+        }else{
+            tween = new Array(zahl);
         }
         //Initialisiert die Animationen fuer jedes Feld
         for( var i = 0; i < tween.length; i++){
