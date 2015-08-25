@@ -216,7 +216,6 @@ function onMouseMove( event ) {
 
   if(intersects.length) {
     if (spielernummer === intersects[0].object.parent.spielernummer) {
-        console.log("Hover");
         if(intersects[0].object.parent.aktuellePos){
             hover = (intersects[0].object.parent.aktuellePos + 40 - wuerfelZahl) % spielfelder.length;
             console.log(hover);
@@ -226,10 +225,7 @@ function onMouseMove( event ) {
             spielfelder[hover].material.color.setHex(0xFF4C4C);
         }
     }
-    // console.log(Math.round(intersects[ 0 ].point.x));
-    // console.log(Math.round(intersects[ 0 ].point.z));
   } else {
-    console.log(hover);
     spielfelder[hover].material.color.setHex(0xffffff); 
   }
 }
