@@ -215,11 +215,22 @@ function onMouseMove( event ) {
   var intersects = raycaster.intersectObjects( spielfiguren.children, true );
 
   if(intersects.length) {
-    spielfelder[4].material.color.setHex( 0xFF4C4C); 
+    if (spielernummer === intersects[0].object.parent.spielernummer) {
+        console.log("Hover");
+        if(intersects[0].object.parent.aktuellePos){
+            hover = (intersects[0].object.parent.aktuellePos + 40 - wuerfelZahl) % spielfelder.length;
+            console.log(hover);
+            spielfelder[hover].material.color.setHex(0xFF4C4C);
+        } else if (wuerfelZahl === 6) {
+            hover = spielerArr[spielernummer].start;
+            spielfelder[hover].material.color.setHex(0xFF4C4C);
+        }
+    }
     // console.log(Math.round(intersects[ 0 ].point.x));
     // console.log(Math.round(intersects[ 0 ].point.z));
   } else {
-    spielfelder[4].material.color.setHex(0xffffff); 
+    console.log(hover);
+    spielfelder[hover].material.color.setHex(0xffffff); 
   }
 }
 
@@ -246,7 +257,9 @@ function onMouseDown( event ) {
   var intersects = raycaster.intersectObjects( spielfiguren.children, true );
 
   if(intersects.length) {
-    setzeHut(intersects[0].object.parent);
+    // Nur aktiver Spieler darf Figuren setzen
+    if (spielernummer === intersects[0].object.parent.spielernummer)
+        setzeHut(intersects[0].object.parent);
   }
 }
 
