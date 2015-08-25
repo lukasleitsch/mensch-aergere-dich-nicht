@@ -28,7 +28,7 @@ function wuerfeln(){
     }
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     // var zahl = Math.floor((Math.random() * 6) + 1);
-    zahl = 6;
+    wuerfelZahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
@@ -36,9 +36,9 @@ function wuerfeln(){
     $('#modal_wuerfeln').modal('show');
     rendererWuerfel.setSize($('#modal_wuerfeln .modal-body').width(), 300);
 
-    $('#modal_wuerfeln .ergebnis').html(zahl);
+    $('#modal_wuerfeln .ergebnis').html(wuerfelZahl);
 
-    switch(zahl) {
+    switch(wuerfelZahl) {
         case 1:
             new TWEEN.Tween(wuerfelCube.rotation).to({ x: rad(0), z: rad(90), y: rad(0)}, 2000).easing(TWEEN.Easing.Elastic.Out).delay(500).start().onComplete(function(){show_result()});
             break;
@@ -125,13 +125,13 @@ $(function() {
  * 
  * @param {int} spielernummer
  */
-function setzeHut(figur, zahl){
+function setzeHut(figur){
     //Wandelt aus Spielernummer das Spielerobjekt
     var spieler = spielerArr[spielernummer];
     //Prueft ob es ein aktives Huetchen gibt
     if(!figur.aktuellePos){
         //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
-        if(counter < 3 && zahl === 6){
+        if(counter < 3 && wuerfelZahl === 6){
             var setzen = new TWEEN.Tween(figur.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut);
             figur.aktuellePos = spieler.start;
             if(spielfelder[figur.aktuellePos].besetzt){
@@ -142,17 +142,17 @@ function setzeHut(figur, zahl){
             spielfelder[figur.aktuellePos].besetzt = figur;
         }
         counter++;
-        if(counter === 3 && zahl !== 6){
+        if(counter === 3 && wuerfelZahl !== 6){
             wechsleSpieler();
         }
     }else{
         var tween;
-        //Erstellt ein Array mit der Anzahl benötigter Animationen
+        //Erstellt ein Array mit der Anwzahl benötigter Animationen
         delete spielfelder[figur.aktuellePos].besetzt;
-        if(spielfelder[(figur.aktuellePos + 40 - zahl) % spielfelder.length].besetzt){
-            tween = new Array(zahl + 1);
+        if(spielfelder[(figur.aktuellePos + 40 - wuerfelZahl) % spielfelder.length].besetzt){
+            tween = new Array(wuerfelZahl + 1);
         }else{
-            tween = new Array(zahl);
+            tween = new Array(wuerfelZahl);
         }
         //Initialisiert die Animationen fuer jedes Feld
         for( var i = 0; i < tween.length; i++){
@@ -160,7 +160,7 @@ function setzeHut(figur, zahl){
             tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 39) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
             //Weißt das naechste Feld zu
             figur.aktuellePos = (figur.aktuellePos + 39) % spielfelder.length;
-            if(tween.length > zahl && i === zahl - 2){
+            if(tween.length > wuerfelZahl && i === wuerfelZahl - 2){
                 tween[i + 1] = rauswerfen((figur.aktuellePos + 39) % spielfelder.length);
                 i = i + 1;
             }
@@ -170,7 +170,7 @@ function setzeHut(figur, zahl){
             tween[i].chain(tween[i+1]);    
         }
         //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
-        if(zahl !== 6){
+        if(wuerfelZahl !== 6){
             tween[tween.length - 1].onComplete(function() {
                     wechsleSpieler();
             });
