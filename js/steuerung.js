@@ -19,19 +19,20 @@ function wechsleSpieler(){
 }
 
 /*
- * gibt Zufallszahl zwischen 1 und 6 heraus
+ * Öfffnet Fenster, in dem gewürfel wird
  */
 function wuerfeln(){
     function rad(angle){
         return (angle + 360*5) / 180 * Math.PI;
     }
-    // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
-    // var zahl = Math.floor((Math.random() * 6) + 1);
-    wuerfelZahl = 6;
+
+    wuerfelZahl = Math.floor((Math.random() * 6) + 1);
+    // wuerfelZahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
 
+    //Öffnet Fenster
     $('#modal_wuerfeln').modal('show');
     rendererWuerfel.setSize($('#modal_wuerfeln .modal-body').width(), 300);
 
