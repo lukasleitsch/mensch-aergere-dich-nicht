@@ -14,7 +14,6 @@ var wuerfelZahl;
  * Beendet wird es durch einen Sieg oder durch beenden (run = false)
  */
 function wechsleSpieler(){
-    counter = 0;
     spielernummer = (spielernummer + 1) % anzahlSpieler;
     spielfeldDrehen(spielernummer);
 }
@@ -140,8 +139,11 @@ function setzeHut(figur){
                 setzen.start();
             }
             spielfelder[figur.aktuellePos].besetzt = figur;
+            counter = 0;
         }
-        counter++;
+        else{
+            counter++;
+        }
         if(counter === 3 && wuerfelZahl !== 6){
             wechsleSpieler();
         }
