@@ -14,6 +14,7 @@ var wuerfelZahl;
  * Beendet wird es durch einen Sieg oder durch beenden (run = false)
  */
 function wechsleSpieler(){
+    counter = 0;
     spielernummer = (spielernummer + 1) % anzahlSpieler;
     spielfeldDrehen(spielernummer);
 }
@@ -27,7 +28,7 @@ function wuerfeln(){
     }
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     // var zahl = Math.floor((Math.random() * 6) + 1);
-    wuerfelZahl = 6;
+    wuerfelZahl = Math.floor((Math.random() * 6) + 1);
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
@@ -69,10 +70,15 @@ function wuerfeln(){
             $('#modal_wuerfeln').modal('hide');
          })
     }
-    //Verzögerung zu Testzwecken
-//    setTimeout(function(){
-//        setzeHut(spielernummer, zahl);
-//    }, 5000);
+    if((!spielerArr[spielernummer].figure1.aktuellePos && !spielerArr[spielernummer].figure2.aktuellePos
+            && !spielerArr[spielernummer].figure3.aktuellePos && !spielerArr[spielernummer].figure4.aktuellePos) && wuerfelZahl !== 6){
+        counter++;
+    }
+    if(counter === 3 && wuerfelZahl !== 6){
+            setTimeout(function (){
+                wechsleSpieler();
+            }, 5000);
+    }
 }
 
 /*
@@ -140,12 +146,6 @@ function setzeHut(figur){
             }
             spielfelder[figur.aktuellePos].besetzt = figur;
             counter = 0;
-        }
-        else{
-            counter++;
-        }
-        if(counter === 3 && wuerfelZahl !== 6){
-            wechsleSpieler();
         }
     }else{
         var tween;
@@ -260,8 +260,9 @@ function onMouseDown( event ) {
 
   if(intersects.length) {
     // Nur aktiver Spieler darf Figuren setzen
-    if (spielernummer === intersects[0].object.parent.spielernummer)
+    if (spielernummer === intersects[0].object.parent.spielernummer) {
         setzeHut(intersects[0].object.parent);
+    }
   }
 }
 
