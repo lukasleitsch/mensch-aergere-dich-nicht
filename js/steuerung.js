@@ -7,6 +7,7 @@
 var spielernummer = 0;                  //Pointer auf Spieler
 var counter = 0;
 var anzahlSpieler = 4;
+var wuerfelZahl;
 
 /*
  * Startet und initialisiert das Spiel
@@ -27,7 +28,7 @@ function wuerfeln(){
     }
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     // var zahl = Math.floor((Math.random() * 6) + 1);
-    var zahl = 6;
+    zahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
@@ -190,3 +191,66 @@ function rauswerfen(feldnummer){
     delete spielerFigur.aktuellePos;
     return rauswurf;
 }
+
+// Maus-Events
+
+// Mouse Over für Spielfiguren
+
+function onMouseMove( event ) {
+
+  var raycaster = new THREE.Raycaster();
+  var mouse = new THREE.Vector2();
+
+  // calculate mouse position in normalized device coordinates
+  // (-1 to +1) for both components
+
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;  
+
+
+  // update the picking ray with the camera and mouse position 
+  raycaster.setFromCamera( mouse, camera ); 
+
+  // calculate objects intersecting the picking ray
+  var intersects = raycaster.intersectObjects( spielfiguren.children, true );
+
+  if(intersects.length) {
+    spielfelder[4].material.color.setHex( 0xFF4C4C); 
+    // console.log(Math.round(intersects[ 0 ].point.x));
+    // console.log(Math.round(intersects[ 0 ].point.z));
+  } else {
+    spielfelder[4].material.color.setHex(0xffffff); 
+  }
+}
+
+// Mouse Click für Spielfiguren
+
+function onMouseDown( event ) {
+
+  event.preventDefault();
+
+  var raycaster = new THREE.Raycaster();
+  var mouse = new THREE.Vector2();
+
+  // calculate mouse position in normalized device coordinates
+  // (-1 to +1) for both components
+
+  mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+  mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;  
+
+
+  // update the picking ray with the camera and mouse position 
+  raycaster.setFromCamera( mouse, camera ); 
+
+  // calculate objects intersecting the picking ray
+  var intersects = raycaster.intersectObjects( spielfiguren.children, true );
+
+  if(intersects.length) {
+    setzeHut(intersects[0].object.parent);
+  }
+}
+
+//EventListener für Maus-Events
+
+window.addEventListener( 'mousemove', onMouseMove, false );
+window.addEventListener( 'mousedown', onMouseDown, false );
