@@ -156,56 +156,58 @@ $(function () {
  * @param {int} spielernummer
  */
 function setzeHut(figur) {
-    //Wandelt aus Spielernummer das Spielerobjekt
-    var spieler = spielerArr[spielernummer];
-    gewuerfelt = false;
-    //Prueft ob es ein aktives Huetchen gibt
-    if (!figur.aktuellePos) {
-        //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
-        if (counter < 3 && wuerfelZahl === 6) {
-            var setzen = new TWEEN.Tween(figur.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut);
-            figur.aktuellePos = spieler.start;
-            if (spielfelder[figur.aktuellePos].besetzt) {
-                rauswerfen(figur.aktuellePos).chain(setzen).start();
-            } else {
-                setzen.start();
+    if (gewuerfelt) {
+        //Wandelt aus Spielernummer das Spielerobjekt
+        var spieler = spielerArr[spielernummer];
+        gewuerfelt = false;
+        //Prueft ob es ein aktives Huetchen gibt
+        if (!figur.aktuellePos) {
+            //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
+            if (counter < 3 && wuerfelZahl === 6) {
+                var setzen = new TWEEN.Tween(figur.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut);
+                figur.aktuellePos = spieler.start;
+                if (spielfelder[figur.aktuellePos].besetzt) {
+                    rauswerfen(figur.aktuellePos).chain(setzen).start();
+                } else {
+                    setzen.start();
+                }
+                spielfelder[figur.aktuellePos].besetzt = figur;
+                counter = 0;
             }
-            spielfelder[figur.aktuellePos].besetzt = figur;
-            counter = 0;
-        }
-    } else {
-        var tween;
-        //Erstellt ein Array mit der Anwzahl benötigter Animationen
-        delete spielfelder[figur.aktuellePos].besetzt;
-        if (spielfelder[(figur.aktuellePos + 40 - wuerfelZahl) % spielfelder.length].besetzt) {
-            tween = new Array(wuerfelZahl + 1);
         } else {
-            tween = new Array(wuerfelZahl);
-        }
-        //Initialisiert die Animationen fuer jedes Feld
-        for (var i = 0; i < tween.length; i++) {
-            //Erstellt die einzelnen Animationen
-            tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 39) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
-            //Weißt das naechste Feld zu
-            figur.aktuellePos = (figur.aktuellePos + 39) % spielfelder.length;
-            if (tween.length > wuerfelZahl && i === wuerfelZahl - 2) {
-                tween[i + 1] = rauswerfen((figur.aktuellePos + 39) % spielfelder.length);
-                i = i + 1;
+            var tween;
+            //Erstellt ein Array mit der Anwzahl benötigter Animationen
+            delete spielfelder[figur.aktuellePos].besetzt;
+            if (spielfelder[(figur.aktuellePos + 40 - wuerfelZahl) % spielfelder.length].besetzt) {
+                tween = new Array(wuerfelZahl + 1);
+            } else {
+                tween = new Array(wuerfelZahl);
             }
+            //Initialisiert die Animationen fuer jedes Feld
+            for (var i = 0; i < tween.length; i++) {
+                //Erstellt die einzelnen Animationen
+                tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 39) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
+                //Weißt das naechste Feld zu
+                figur.aktuellePos = (figur.aktuellePos + 39) % spielfelder.length;
+                if (tween.length > wuerfelZahl && i === wuerfelZahl - 2) {
+                    tween[i + 1] = rauswerfen((figur.aktuellePos + 39) % spielfelder.length);
+                    i = i + 1;
+                }
+            }
+            //Verkettet die Animationen
+            for (var i = 0; i < tween.length - 1; i++) {
+                tween[i].chain(tween[i + 1]);
+            }
+            //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
+            if (wuerfelZahl !== 6) {
+                tween[tween.length - 1].onComplete(function () {
+                    wechsleSpieler();
+                });
+            }
+            //Startet die Animationen und den Setzvorgang
+            tween[0].start();
+            spielfelder[figur.aktuellePos].besetzt = figur;
         }
-        //Verkettet die Animationen
-        for (var i = 0; i < tween.length - 1; i++) {
-            tween[i].chain(tween[i + 1]);
-        }
-        //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
-        if (wuerfelZahl !== 6) {
-            tween[tween.length - 1].onComplete(function () {
-                wechsleSpieler();
-            });
-        }
-        //Startet die Animationen und den Setzvorgang
-        tween[0].start();
-        spielfelder[figur.aktuellePos].besetzt = figur;
     }
 }
 
