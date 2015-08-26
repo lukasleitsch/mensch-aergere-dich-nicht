@@ -4,15 +4,15 @@
  */
 
 //Globale Variablen
-var spielernummer = 0;                  //Pointer auf Spieler
-var counter = 0;
-var anzahlSpieler = 4;
-var wuerfelZahl;
-var gewuerfelt = false;
+var spielernummer = 0;                  // Pointer auf Spieler
+var counter = 0;                        // Wuerfelzaehler
+var anzahlSpieler = 4;                  // Anzahl der Mitspieler
+var wuerfelZahl;                        // Gewuerfelte Augenzahl
+var gewuerfelt = false;                 // Sperrvariable
 
 /*
- * Startet und initialisiert das Spiel
- * Beendet wird es durch einen Sieg oder durch beenden (run = false)
+ * Wechselt den aktuellen Spieler, Wuerfelcounter wird resetet und das
+ * Spielfeld wird dementsprechend gedreht.
  */
 function wechsleSpieler() {
     counter = 0;
@@ -21,7 +21,8 @@ function wechsleSpieler() {
 }
 
 /*
- * Öfffnet Fenster, in dem gewürfel wird
+ * Öffnet ein Overlay, in dem sich der Wuerfel aufgrund der generierten 
+ * Zufallszahl dreht und anzeigt
  */
 function wuerfeln() {
     if (!gewuerfelt) {
@@ -161,7 +162,7 @@ function setzeHut(figur) {
         var spieler = spielerArr[spielernummer];
         gewuerfelt = false;
         //Prueft ob es ein aktives Huetchen gibt
-        if (!figur.aktuellePos) {
+        if (typeof figur.aktuellePos === 'undefined') {
             //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
             if (counter < 3 && wuerfelZahl === 6) {
                 var setzen = new TWEEN.Tween(figur.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut);
@@ -178,7 +179,7 @@ function setzeHut(figur) {
             var tween;
             //Erstellt ein Array mit der Anwzahl benötigter Animationen
             delete spielfelder[figur.aktuellePos].besetzt;
-            if (spielfelder[(figur.aktuellePos + 40 - wuerfelZahl) % spielfelder.length].besetzt) {
+            if (spielfelder[(figur.aktuellePos + wuerfelZahl) % spielfelder.length].besetzt) {
                 tween = new Array(wuerfelZahl + 1);
             } else {
                 tween = new Array(wuerfelZahl);
@@ -186,11 +187,11 @@ function setzeHut(figur) {
             //Initialisiert die Animationen fuer jedes Feld
             for (var i = 0; i < tween.length; i++) {
                 //Erstellt die einzelnen Animationen
-                tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 39) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
+                tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
                 //Weißt das naechste Feld zu
-                figur.aktuellePos = (figur.aktuellePos + 39) % spielfelder.length;
+                figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
                 if (tween.length > wuerfelZahl && i === wuerfelZahl - 2) {
-                    tween[i + 1] = rauswerfen((figur.aktuellePos + 39) % spielfelder.length);
+                    tween[i + 1] = rauswerfen((figur.aktuellePos + 1) % spielfelder.length);
                     i = i + 1;
                 }
             }
@@ -211,7 +212,12 @@ function setzeHut(figur) {
     }
 }
 
-
+/*
+ * Erstellt und gibt eine Animation fuer das zurueckzusetzende Huetchen
+ * zurueck
+ * @param {int} feldnummer  Position des gegnerischen Huetchens
+ * @returns {TWEEN} Animation des Rauswurfes
+ */
 function rauswerfen(feldnummer) {
     //Ermittle Spieler und Figur
     var spielerFigur = spielfelder[feldnummer].besetzt;
@@ -222,10 +228,23 @@ function rauswerfen(feldnummer) {
     return rauswurf;
 }
 
+function ausweichen(feldnummer, animation)  {
+    // Ermittle Spieler und Figur
+    var spielerFigur = spielfelder[feldnummer].besetzt;
+    // Animation zum nach oben Ausweichen
+    var ausweichen = new TWEEN.Tween(spielerFigur.position).to({x : spielerFigur.position.x, y: 2, z :spielerFigur.position.z}, 500).easing(TWEEN.Easing.Elastic.InOut);
+    // Animation zum zuruecksetzen
+    var zurueck = new TWEEN.Tween(spielerFigur.position).to({x : spielerFigur.position.x, y: 0, z :spielerFigur.position.z}, 500).easing(TWEEN.Easing.Elastic.InOut);
+    return ausweichen;
+}
+
 // Maus-Events
 
-// Mouse Over für Spielfiguren
-
+/*
+ * Maus-Over Effekt fuer die Spielfiguren. Wurde gewuerfelt und alle Bedingungen
+ * sind erfuellt, so faerbt sich das zu erreichende Spielfeld, von dem sich 
+ * unter dem Mauszeiger befindliche Spielerhuetchen, rot
+ */
 function onMouseMove(event) {
     if (gewuerfelt) {
         var raycaster = new THREE.Raycaster();
@@ -246,12 +265,12 @@ function onMouseMove(event) {
 
         if (intersects.length) {
             if (spielernummer === intersects[0].object.parent.spielernummer) {
-                if (intersects[0].object.parent.aktuellePos) {
-                    hover = (intersects[0].object.parent.aktuellePos + 40 - wuerfelZahl) % spielfelder.length;
-                    console.log(hover);
-                    spielfelder[hover].material.color.setHex(0xFF4C4C);
-                } else if (wuerfelZahl === 6) {
+                if (typeof intersects[0].object.parent.aktuellePos  === 'undefined' && wuerfelZahl === 6) {
                     hover = spielerArr[spielernummer].start;
+                    spielfelder[hover].material.color.setHex(0xFF4C4C);
+                } else {
+                    hover = (intersects[0].object.parent.aktuellePos + wuerfelZahl) % spielfelder.length;
+                    console.log(hover);
                     spielfelder[hover].material.color.setHex(0xFF4C4C);
                 }
             }
@@ -261,8 +280,12 @@ function onMouseMove(event) {
     }
 }
 
-// Mouse Click für Spielfiguren
 
+/*
+ * Maus-Klick Event, das zu dem aktuellen Spieler und dessen gewuerfelte
+ * Augenzahl das gewuenschte Huetchen setzt, sofern die Bedingung erfuellt 
+ * werden
+ */
 function onMouseDown(event) {
 
     event.preventDefault();
@@ -293,6 +316,5 @@ function onMouseDown(event) {
 }
 
 //EventListener für Maus-Events
-
 window.addEventListener('mousemove', onMouseMove, false);
 window.addEventListener('mousedown', onMouseDown, false);

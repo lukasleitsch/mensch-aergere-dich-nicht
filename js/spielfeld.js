@@ -147,9 +147,9 @@ scene.add(spielfiguren);
 
 // Maussteuerung
 
-controls = new THREE.OrbitControls( camera );
-controls.damping = 0.2;
-controls.addEventListener( 'change', render );
+// controls = new THREE.OrbitControls( camera );
+// controls.damping = 0.2;
+// controls.addEventListener( 'change', render );
 
 // Loop-Funktion aufrufen
 var render = function() {
@@ -213,48 +213,46 @@ for (var i = 0; i < spielfelder.length; i++) {
 * Setzt die Position der einzelnen Spielfelder auf dem gesamten Spielbrett
 * fest und fuegt sie der Szene hinzu
 */
-spielfelder[0].position.set(-1, 0, -5);
-spielfelder[1].position.set(-1, 0, -4);
-spielfelder[2].position.set(-1, 0, -3);
-spielfelder[3].position.set(-1, 0, -2);
-spielfelder[4].position.set(-1, 0, -1);
-spielfelder[5].position.set(-2, 0, -1);
-spielfelder[6].position.set(-3, 0, -1);
-spielfelder[7].position.set(-4, 0, -1);
-spielfelder[8].position.set(-5, 0, -1);
-spielfelder[9].position.set(-5, 0, 0);
-spielfelder[10].position.set(-5, 0, 1);
-spielfelder[11].position.set(-4, 0, 1);
-spielfelder[12].position.set(-3, 0, 1);
-spielfelder[13].position.set(-2, 0, 1);
-spielfelder[14].position.set(-1, 0, 1);
-spielfelder[15].position.set(-1, 0, 2);
-spielfelder[16].position.set(-1, 0, 3);
-spielfelder[17].position.set(-1, 0, 4);
-spielfelder[18].position.set(-1, 0, 5);
-spielfelder[19].position.set(0, 0, 5);
-spielfelder[20].position.set(1, 0, 5);
-spielfelder[21].position.set(1, 0, 4);
-spielfelder[22].position.set(1, 0, 3);
-spielfelder[23].position.set(1, 0, 2);
-spielfelder[24].position.set(1, 0, 1);
-spielfelder[25].position.set(2, 0, 1);
-spielfelder[26].position.set(3, 0, 1);
-spielfelder[27].position.set(4, 0, 1);
-spielfelder[28].position.set(5, 0, 1);
+spielfelder[39].position.set(0, 0, 5);
+spielfelder[38].position.set(1, 0, 5);
+spielfelder[37].position.set(1, 0, 4);
+spielfelder[36].position.set(1, 0, 3);
+spielfelder[35].position.set(1, 0, 2);
+spielfelder[34].position.set(1, 0, 1);
+spielfelder[33].position.set(2, 0, 1);
+spielfelder[32].position.set(3, 0, 1);
+spielfelder[31].position.set(4, 0, 1);
+spielfelder[30].position.set(5, 0, 1);      //Starfeld Gruen
 spielfelder[29].position.set(5, 0, 0);
-spielfelder[30].position.set(5, 0, -1);
-spielfelder[31].position.set(4, 0, -1);
-spielfelder[32].position.set(3, 0, -1);
-spielfelder[33].position.set(2, 0, -1);
-spielfelder[34].position.set(1, 0, -1);
-spielfelder[35].position.set(1, 0, -2);
-spielfelder[36].position.set(1, 0, -3);
-spielfelder[37].position.set(1, 0, -4);
-spielfelder[38].position.set(1, 0, -5);
-spielfelder[39].position.set(0, 0, -5);
-
-console.log(spielfelder[39]);
+spielfelder[28].position.set(5, 0, -1);
+spielfelder[27].position.set(4, 0, -1);
+spielfelder[26].position.set(3, 0, -1);
+spielfelder[25].position.set(2, 0, -1);
+spielfelder[24].position.set(1, 0, -1);
+spielfelder[23].position.set(1, 0, -2);
+spielfelder[22].position.set(1, 0, -3);
+spielfelder[21].position.set(1, 0, -4);
+spielfelder[20].position.set(1, 0, -5);     //Startfeld Gelb
+spielfelder[19].position.set(0, 0, -5);
+spielfelder[18].position.set(-1, 0, -5);
+spielfelder[17].position.set(-1, 0, -4);
+spielfelder[16].position.set(-1, 0, -3);
+spielfelder[15].position.set(-1, 0, -2);
+spielfelder[14].position.set(-1, 0, -1);
+spielfelder[13].position.set(-2, 0, -1);
+spielfelder[12].position.set(-3, 0, -1);
+spielfelder[11].position.set(-4, 0, -1);
+spielfelder[10].position.set(-5, 0, -1);    // Startfeld Rot
+spielfelder[9].position.set(-5, 0, 0);
+spielfelder[8].position.set(-5, 0, 1);
+spielfelder[7].position.set(-4, 0, 1);
+spielfelder[6].position.set(-3, 0, 1);
+spielfelder[5].position.set(-2, 0, 1);
+spielfelder[4].position.set(-1, 0, 1);
+spielfelder[3].position.set(-1, 0, 2);
+spielfelder[2].position.set(-1, 0, 3);
+spielfelder[1].position.set(-1, 0, 4);
+spielfelder[0].position.set(-1, 0, 5);  // Startfeld Blau
 
 // Fuegt die Spielfelder der Szene hinzu
 for (var i = 0; i < spielfelder.length; i++) {

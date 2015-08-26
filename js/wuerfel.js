@@ -39,9 +39,9 @@ sceneWuerfel.add(cameraWuerfel);
 
 // Maussteuerung
 
-controlsWuerfel = new THREE.OrbitControls( cameraWuerfel );
-controlsWuerfel.damping = 0.2;
-controlsWuerfel.addEventListener( 'change', renderWuerfel );
+// controlsWuerfel = new THREE.OrbitControls( cameraWuerfel );
+// controlsWuerfel.damping = 0.2;
+// controlsWuerfel.addEventListener( 'change', renderWuerfel );
 
 var imagePrefix = "img/";
 var directions  = ["eins", "sechs", "drei", "vier", "fuenf", "zwei"];

@@ -21,7 +21,7 @@ var spielerBlau = {
 		x: hausfelder[1][3].position.x,
 		y: hausfelder[1][3].position.z
 	},
-	start: 18
+	start: 0
 };
 
 // Setze SpielerBlau in Hausfelder
@@ -68,7 +68,7 @@ var spielerRot = {
 		x: hausfelder[0][3].position.x,
 		y: hausfelder[0][3].position.z
 	},
-	start: 8
+	start: 10
 };
 
 // Setze SpielerRot in Hausfelder und weise hausfelder den Hueten zu
@@ -114,7 +114,7 @@ var spielerGelb = {
 		x: hausfelder[3][3].position.x,
 		y: hausfelder[3][3].position.z
 	},
-	start: 38
+	start: 20
 };
 
 // Setze spielerGelb in Hausfelder
@@ -161,7 +161,7 @@ var spielerGruen = {
 		x: hausfelder[2][3].position.x,
 		y: hausfelder[2][3].position.z
 	},
-	start: 28
+	start: 30
 };
 
 // Setze SpielerRot in Hausfelder
