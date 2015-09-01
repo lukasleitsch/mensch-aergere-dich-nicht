@@ -78,6 +78,7 @@ renderer.shadowMapEnabled = true;
 renderer.shadowMapSoft = true;
 renderer.shadowMapType = THREE.PCFShadowMap;
 
+
 renderer.setSize($(window).width()-3, $(window).height()-5);
 document.getElementById('spielfeld').appendChild(renderer.domElement );
 // document.body.appendChild(renderer.domElement);
@@ -138,7 +139,7 @@ camera.add(directionalLightTop);
 scene.add(ambientLight);
 
 // Setzt die Kamera in Position
-camera.position.set(0, 11, 10);
+camera.position.set(0, 11, 11);
 camera.up.set( 0, 1, 0 );
 camera.lookAt(scene.position);
 
@@ -163,14 +164,15 @@ scene.add(spielfiguren);
 
 // Maussteuerung
 
-// controls = new THREE.OrbitControls( camera );
-// controls.damping = 0.2;
-// controls.addEventListener( 'change', render );
+controls = new THREE.OrbitControls( camera );
+controls.damping = 0.2;
+controls.addEventListener( 'change', render );
 
 // Loop-Funktion aufrufen
 var render = function() {
  requestAnimationFrame(render);
  renderer.render(scene, camera);
+ TWEEN.update();
 };
 
 render();

@@ -5831,7 +5831,8 @@ button.close {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  color: #333; }
 
 #menu .spieler_3, #menu .spieler_4 {
   display: none; }
@@ -5859,6 +5860,7 @@ body {
     border: 1px solid black; }
 
 #modal_wuerfeln .ergebnis {
+  color: #34495e;
   position: absolute;
   opacity: 0;
   top: 50%;
@@ -5876,7 +5878,15 @@ body {
   position: fixed;
   display: flex;
   justify-content: space-between;
-  box-shadow: 0 5px 10px 0px #777; }
+  box-shadow: 0 5px 10px 0px #777;
+  font-weight: 300; }
+  .header button {
+    text-transform: uppercase;
+    transition: all 0.2s ease; }
+    .header button:hover {
+      transition: all 0.2s ease;
+      background-color: #34495e;
+      color: white; }
   .header #ausgabe {
     flex: 3;
     text-align: center;
