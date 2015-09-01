@@ -64,7 +64,8 @@ var camera = new THREE.PerspectiveCamera(55,
    
 // Erstellt Lichter
 var ambientLight = new THREE.AmbientLight(0x404040);
-var directionalLight = new THREE.DirectionalLight(0xdfebff);
+var directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+var directionalLightTop = new THREE.DirectionalLight(0xffffff, 0.4);
 
 
 // Erstellt den Renderer
@@ -90,7 +91,8 @@ document.getElementById('spielfeld').appendChild(renderer.domElement );
 // document.body.appendChild(renderer.domElement);
 
 // Richtungslicht nach oben setzen
-directionalLight.position.set(80, 100, 80);
+// directionalLight.position.set(80, 100, 80);
+directionalLight.position.set(80, 0, 100);
 
 directionalLight.castShadow = true;
 directionalLight.shadowCameraVisible = false;
@@ -108,17 +110,23 @@ directionalLight.shadowCameraBottom = -d;
 directionalLight.shadowCameraFar = 200;
 directionalLight.shadowDarkness = 0.2;
 
+// Licht von oben für allgemeine Ausleutung
+
+directionalLightTop.position.set(0, 200, 0);
+
 // white spotlight shining from the side, casting shadow
 
-var spotLight = new THREE.SpotLight( 0xFBB829,1 );
-spotLight.position.set( 4.5, 5, 4.5 );
-// var targetSpotLight = new THREE.Object3D();
-// targetSpotLight.position.set(-5, 0, -5);
-// spotLight.target = targetSpotLight;
+var targetGeometry = new THREE.BoxGeometry( 0, 0, 0 );
+var targetCube = new THREE.Mesh( targetGeometry );
+targetCube.position.set(-4.5,0,-4.5);
+scene.add( targetCube );
 
-spotLight.target.position.set(-50, 0, 100);
+var spotLight = new THREE.SpotLight(0xffffff, 0.7);
+spotLight.position.set( -4.5, 3, -4.5 );
 
-console.log(spotLight);
+spotLight.visible = true;
+spotLight.target = targetCube;
+
 
 spotLight.castShadow = true;
 spotLight.shadowCameraVisible = true;
@@ -133,7 +141,8 @@ spotLight.shadowCameraFov = 10;
 // scene.add( spotLight );
 
 // Licher der Scene hinzufuegen
-scene.add(directionalLight);
+camera.add(directionalLight);
+camera.add(directionalLightTop);
 scene.add(ambientLight);
 
 // Setzt die Kamera in Position
@@ -147,9 +156,9 @@ scene.add(spielfiguren);
 
 // Maussteuerung
 
-// controls = new THREE.OrbitControls( camera );
-// controls.damping = 0.2;
-// controls.addEventListener( 'change', render );
+controls = new THREE.OrbitControls( camera );
+controls.damping = 0.2;
+controls.addEventListener( 'change', render );
 
 // Loop-Funktion aufrufen
 var render = function() {

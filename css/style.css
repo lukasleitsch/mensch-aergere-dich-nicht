@@ -5,6 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -5829,7 +5830,8 @@ button.close {
     display: none !important; } }
 body {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  font-family: 'Roboto', sans-serif; }
 
 #menu .spieler_3, #menu .spieler_4 {
   display: none; }
@@ -5885,15 +5887,17 @@ body {
   transform: translate(-50%, -50%); }
 
 #ausgabe {
-  width: 100%;
+  width: 60%;
   height: 38px;
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   overflow: hidden;
-  font-size: 20px;
-  text-align: center; }
+  font-size: 24px;
+  text-align: center;
+  border: 1px solid #eee;
+  box-shadow: 0 10px 6px -6px #777; }
   #ausgabe .wrap {
     top: 0;
     left: 50%;
@@ -5901,4 +5905,4 @@ body {
     position: absolute; }
   #ausgabe p {
     margin: 0;
-    padding: 5px 0; }
+    padding: 2px 0; }

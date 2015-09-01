@@ -18,11 +18,11 @@ function wechsleSpieler() {
   counter = 0;
   spielernummer = (spielernummer + 1) % anzahlSpieler;
   spielfeldDrehen(spielernummer);
-  ausgabe("Spieler " + spielerArr[spielernummer].name + " ist an der Reihe.");
+  ausgabe(spielerArr[spielernummer].name + " ist an der Reihe.");
 }
 
 /*
- * Öffnet ein Overlay, in dem sich der Wuerfel aufgrund der generierten 
+ * Ã–ffnet ein Overlay, in dem sich der Wuerfel aufgrund der generierten 
  * Zufallszahl dreht und anzeigt
  */
 function wuerfeln() {
@@ -33,13 +33,13 @@ function wuerfeln() {
 
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     // var zahl = Math.floor((Math.random() * 6) + 1);
-    // wuerfelZahl = Math.floor((Math.random() * 6) + 1);
-    wuerfelZahl = 6;
+    wuerfelZahl = Math.floor((Math.random() * 6) + 1);
+    // wuerfelZahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
 
-    //Öffnet Fenster
+    //Ã–ffnet Fenster
     $('#modal_wuerfeln').modal('show');
     rendererWuerfel.setSize($('#modal_wuerfeln .modal-body').width(), 300);
 
@@ -87,6 +87,7 @@ function wuerfeln() {
         fontSize: "28em",
       }, 1000).delay(1000).fadeOut('fast', function() {
         $('#modal_wuerfeln').modal('hide');
+        ausgabe(spielerArr[spielernummer].name + " bitte Figur setzen.");
       })
     }
     if ((!spielerArr[spielernummer].figure1.aktuellePos && !spielerArr[spielernummer].figure2.aktuellePos
@@ -104,8 +105,9 @@ function wuerfeln() {
   }
   else
   {
-    ausgbe("Bitte erst setzen");
+    ausgabe("Bitte erst setzen");
   }
+
 }
 
 /*
@@ -143,7 +145,7 @@ function spielfeldDrehen(count) {
 }
 
 /*
- * Startet ein Event wenn man den Button 'Würfeln' drueckt
+ * Startet ein Event wenn man den Button 'WÃ¼rfeln' drueckt
  */
 $(function() {
   $('button.wuerfeln').click(function(event) {
@@ -178,7 +180,7 @@ function setzeHut(figur) {
       }
     } else {
       var tween;
-      //Erstellt ein Array mit der Anwzahl benötigter Animationen
+      //Erstellt ein Array mit der Anwzahl benÃ¶tigter Animationen
       delete spielfelder[figur.aktuellePos].besetzt;
 
       if (spielfelder[(figur.aktuellePos + wuerfelZahl) % spielfelder.length].besetzt) {
@@ -190,7 +192,7 @@ function setzeHut(figur) {
       for (var i = 0; i < tween.length; i++) {
         //Erstellt die einzelnen Animationen
         tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
-        //Weißt das naechste Feld zu
+        //WeiÃŸt das naechste Feld zu
         figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
         //Erstellt die Animation fuer das Rauswerfen
         if (tween.length > wuerfelZahl && i === wuerfelZahl - 2) {
@@ -345,9 +347,13 @@ function onMouseDown(event) {
       spielfelder[intersects[0].object.parent.aktuellePos].material.color.setHex(0xffffff);
     }
   }
+
+  if(!gewuerfelt){
+    ausgabe("Bitte wÃ¼rfeln!");
+  }
 }
 
-//EventListener für Maus-Events
+//EventListener fÃ¼r Maus-Events
 window.addEventListener('mousemove', onMouseMove, false);
 window.addEventListener('mousedown', onMouseDown, false);
 
