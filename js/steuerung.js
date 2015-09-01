@@ -104,7 +104,7 @@ function wuerfeln() {
     }
     else
     {
-        ausgbe("Bitte erst setzen");
+        ausgabe("Bitte erst setzen");
     }
 }
 
