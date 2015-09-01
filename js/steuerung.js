@@ -4,7 +4,7 @@
  */
 
 //Globale Variablen
-var spielernummer = 0;                  // Pointer auf Spieler
+var spielernummer = 1;                  // Pointer auf Spieler
 var counter = 0;                        // Wuerfelzaehler
 var anzahlSpieler = 4;                  // Anzahl der Mitspieler
 var wuerfelZahl;                        // Gewuerfelte Augenzahl
@@ -34,8 +34,8 @@ function wuerfeln() {
 
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     // var zahl = Math.floor((Math.random() * 6) + 1);
-    wuerfelZahl = Math.floor((Math.random() * 6) + 1);
-    // wuerfelZahl = 6;
+    // wuerfelZahl = Math.floor((Math.random() * 6) + 1);
+    wuerfelZahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
@@ -160,85 +160,55 @@ $(function() {
  * @param {int} spielernummer
  */
 function setzeHut(figur) {
+///////////NEU
+//To-DO: gewuerfelt zurueccksetzen
   if (gewuerfelt) {
-    //Wandelt aus Spielernummer das Spielerobjekt
+//Wandelt aus Spielernummer das Spielerobjekt
     var spieler = spielerArr[spielernummer];
-    gewuerfelt = false;
     //Prueft ob es ein aktives Huetchen gibt
     if (typeof figur.aktuellePos === 'undefined') {
-      //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
+//Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
       if (counter < 3 && wuerfelZahl === 6) {
         var setzen = new TWEEN.Tween(figur.position).to(spielfelder[spieler.start].position, 1000).easing(TWEEN.Easing.Elastic.InOut);
         figur.aktuellePos = spieler.start;
         if (spielfelder[figur.aktuellePos].besetzt) {
           rauswerfen(figur.aktuellePos).chain(setzen).start();
-        } else {
+        }
+        else {
           setzen.start();
         }
         spielfelder[figur.aktuellePos].besetzt = figur;
         counter = 0;
+        gewuerfelt = false;
       }
-    } else {
-      var tween;
-      //Erstellt ein Array mit der Anwzahl benˆtigter Animationen
-      if ((spielerArr[spielernummer].start + 40 - wuerfelZahl) % spielfelder.length <= figur.aktuellePos) {
-        if (!pruefeFrei(figur)) {
-          ausgabe("Gewinnfeld bereits besetzt..");
-          wechsleSpieler();
-        }
-        else {
-          tween = new Array();
-          delete spielfelder[figur.aktuellePos].besetzt;
-          // Merkvariable
-          var merkeZahl = wuerfelZahl;
-          var merkeFeld = wuerfelZahl - (figur.aktuellePos - (spielerArr[spielernummer].start + 39 - wuerfelZahl)
-                  % spielfelder.length) - 1;
-          // Setzt das Attribut 'Besetzt' auf dem neuen Feld
-          gewinnfelder[spielernummer][merkeFeld].besetzt = figur;
-          while (((figur.aktuellePos + 1) % spielfelder.length) !== spielerArr[spielernummer].start) {
-            var temp = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
-            tween.push(temp);
-            figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
-            merkeZahl--;
-          }
-          for (i = 0; i < merkeZahl; i ++){
-            var temp = new TWEEN.Tween(figur.position).to(gewinnfelder[spielernummer][i].position, 500).easing(TWEEN.Easing.Elastic.InOut);
-            tween.push(temp);
-          }
-          //Verkettet die Animationen
-        for (var i = 0; i < tween.length - 1; i++) {
-          tween[i].chain(tween[i + 1]);
-        }
-        //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
-        if (wuerfelZahl !== 6) {
-          tween[tween.length - 1].onComplete(function() {
-            wechsleSpieler();
-          });
-        }
-        //Startet die Animationen und den Setzvorgang
-        tween[0].start();
-        figur.aktuellePos = gewinnfelder[spielernummer][merkeFeld];
-        console.log(figur.aktuellePos);
-        }
-      }
-      else {
+    }
+    else {
+      var tween = new Array();
+      var merkeZahl = wuerfelZahl;
+      //Ist Wuerfelzahl innerhalb des Feldes -> Keine 2te Runde oder ueber Gewinnfelder hinweg
+      if (pruefeWeg(figur) && figur.aktuellePos < 1000) {
         delete spielfelder[figur.aktuellePos].besetzt;
-        if (spielfelder[(figur.aktuellePos + wuerfelZahl) % spielfelder.length].besetzt) {
-          tween = new Array(wuerfelZahl + 1);
-        } else {
-          tween = new Array(wuerfelZahl);
-        }
-        //Initialisiert die Animationen fuer jedes Feld
-        for (var i = 0; i < tween.length; i++) {
-          //Erstellt die einzelnen Animationen
-          tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.                                         Elastic.InOut);
-          //Weiﬂt das naechste Feld zu
-          figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
-          //Erstellt die Animation fuer das Rauswerfen
-          if (tween.length > wuerfelZahl && i === wuerfelZahl - 2) {
-            tween[i + 1] = rauswerfen((figur.aktuellePos + 1) % spielfelder.length);
-            i = i + 1;
+        while (merkeZahl > 0) {
+          //Ist das Letzte Feld besetzt
+          if (figur.aktuellePos >= 1000 || ((figur.aktuellePos + 1) % spielfelder.length) === spieler.start) {
+            if (figur.aktuellePos >= 1000) {
+              tween.push(new TWEEN.Tween(figur.position).to(gewinnfelder[spielernummer][(figur.aktuellePos + 1) % 1000].position, 500).easing(TWEEN.Easing.Elastic.InOut));
+              figur.aktuellePos = figur.aktuellePos + 1;
+            }
+            else {
+              tween.push(new TWEEN.Tween(figur.position).to(gewinnfelder[spielernummer][0].position, 500).easing(TWEEN.Easing.Elastic.InOut));
+              figur.aktuellePos = 1000;
+            }
           }
+          else {
+            if (merkeZahl === 1 && spielfelder[(figur.aktuellePos + 1) % spielfelder.length].besetzt) {
+              tween.push(rauswerfen(figur.aktuellePos + 1));
+            }
+            tween.push(new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut));
+            //Weiﬂt das naechste Feld zu
+            figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
+          }
+          merkeZahl--;
         }
         //Verkettet die Animationen
         for (var i = 0; i < tween.length - 1; i++) {
@@ -252,7 +222,16 @@ function setzeHut(figur) {
         }
         //Startet die Animationen und den Setzvorgang
         tween[0].start();
-        spielfelder[figur.aktuellePos].besetzt = figur;
+        if (figur.aktuellePos >= 1000) {
+          gewinnfelder[spielernummer][figur.aktuellePos % 1000].besetzt = figur;
+        }
+        else {
+          spielfelder[figur.aktuellePos].besetzt = figur;
+        }
+        gewuerfelt = false;
+      }
+      else {
+        wechsleSpieler();
       }
     }
   }
@@ -265,7 +244,7 @@ function setzeHut(figur) {
  * @returns {TWEEN} Animation des Rauswurfes
  */
 function rauswerfen(feldnummer) {
-  //Ermittle Spieler und Figur
+//Ermittle Spieler und Figur
   var spielerFigur = spielfelder[feldnummer].besetzt;
   //Animation zum Hausfeld
   var rauswurf = new TWEEN.Tween(spielerFigur.position).to(spielerFigur.hausfeld.position, 1000).easing(TWEEN.Easing.Elastic.InOut);
@@ -275,7 +254,7 @@ function rauswerfen(feldnummer) {
 }
 
 function ausweichen(feldnummer, animation) {
-  // Ermittle Spieler und Figur
+// Ermittle Spieler und Figur
   var spielerFigur = spielfelder[feldnummer].besetzt;
   // Animation zum nach oben Ausweichen
   var ausweichen = new TWEEN.Tween(spielerFigur.position).to({x: spielerFigur.position.x, y: 2, z: spielerFigur.position.z}, 500).easing(TWEEN.Easing.Elastic.InOut);
@@ -284,16 +263,18 @@ function ausweichen(feldnummer, animation) {
   return ausweichen;
 }
 
-/*
- * Ueberprueft, ob sich ein eigenes Huetchen auf dem Ziel-Hausfeld befindet
- * @returns {boolean} false wenn es besetzt ist, true andernfalls 
- */
-function pruefeFrei(hut) {
-  if (typeof gewinnfelder[spielernummer][wuerfelZahl - (hut.aktuellePos - (spielerArr[spielernummer].start + 39 - wuerfelZahl)
-          % spielfelder.length) - 1].besetzt === 'undefined') {
+function pruefeWeg(figur) {
+  var spieler = spielerArr[spielernummer];
+  //differenz
+  var dif = (spielfelder.length + gewinnfelder[spielernummer].length) - (((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl);
+  if (((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < spielfelder.length
+          || ((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < (spielfelder.length + gewinnfelder[spielernummer].length - 1)
+          && (typeof gewinnfelder[spielernummer][dif].besetzt === 'undefined')) {
     return true;
   }
-  return false;
+  else {
+    return false;
+  }
 }
 
 // Maus-Events
@@ -307,20 +288,15 @@ function onMouseMove(event) {
   if (gewuerfelt) {
     var raycaster = new THREE.Raycaster();
     var mouse = new THREE.Vector2();
-
     // calculate mouse position in normalized device coordinates
     // (-1 to +1) for both components
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-
     // update the picking ray with the camera and mouse position 
     raycaster.setFromCamera(mouse, camera);
-
     // calculate objects intersecting the picking ray
     var intersects = raycaster.intersectObjects(spielfiguren.children, true);
-
     if (intersects.length) {
       if (spielernummer === intersects[0].object.parent.spielernummer) {
         if (typeof intersects[0].object.parent.aktuellePos === 'undefined' && wuerfelZahl === 6) {
@@ -347,25 +323,19 @@ function onMouseMove(event) {
 function onMouseDown(event) {
 
   event.preventDefault();
-
   var raycaster = new THREE.Raycaster();
   var mouse = new THREE.Vector2();
-
   // calculate mouse position in normalized device coordinates
   // (-1 to +1) for both components
 
   mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-
   // update the picking ray with the camera and mouse position 
   raycaster.setFromCamera(mouse, camera);
-
   // calculate objects intersecting the picking ray
   var intersects = raycaster.intersectObjects(spielfiguren.children, true);
-
   if (intersects.length) {
-    // Nur aktiver Spieler darf Figuren setzen
+// Nur aktiver Spieler darf Figuren setzen
     if (spielernummer === intersects[0].object.parent.spielernummer) {
       setzeHut(intersects[0].object.parent);
       spielfelder[intersects[0].object.parent.aktuellePos].material.color.setHex(0xffffff);
@@ -376,7 +346,6 @@ function onMouseDown(event) {
 //EventListener f√ºr Maus-Events
 window.addEventListener('mousemove', onMouseMove, false);
 window.addEventListener('mousedown', onMouseDown, false);
-
 // Ausgabe
 
 function ausgabe(text) {
