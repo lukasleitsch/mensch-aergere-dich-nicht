@@ -380,10 +380,7 @@ window.addEventListener('mousedown', onMouseDown, false);
 // Ausgabe
 
 function ausgabe(text) {
-  $ausgabe = $('#ausgabe .wrap');
-  $ausgabe.append('<p>' + text + '</p>');
-  var offset = parseInt($ausgabe.css('top')) - 38;
-  $ausgabe.animate({
-    top: offset + "px",
-  }, 1500);
+  $('#ausgabe .content').fadeOut(600, function() {
+    $(this).html(text).fadeIn(600);
+  });
 }

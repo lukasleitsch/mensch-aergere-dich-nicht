@@ -59,7 +59,7 @@ function spielfigure(color, positionX, positionY) {
 var scene = new THREE.Scene();
 
 // Erstellt eine Kamera mit den Attributen
-var camera = new THREE.PerspectiveCamera(55,
+var camera = new THREE.PerspectiveCamera(40,
        window.innerWidth / window.innerHeight, 0.1, 1000);
    
 // Erstellt Lichter
@@ -77,14 +77,6 @@ var renderer = new THREE.WebGLRenderer({
 renderer.shadowMapEnabled = true;   
 renderer.shadowMapSoft = true;
 renderer.shadowMapType = THREE.PCFShadowMap;
-
-       
-// Setzt die Kamera an den beschrieben Ort
-function setzeKamera() {
- camera.position.set(0, 11, 10);
- camera.up.set( 0, 1, 0 );
- camera.lookAt(scene.position);
-}
 
 renderer.setSize($(window).width()-3, $(window).height()-5);
 document.getElementById('spielfeld').appendChild(renderer.domElement );
@@ -146,7 +138,9 @@ camera.add(directionalLightTop);
 scene.add(ambientLight);
 
 // Setzt die Kamera in Position
-setzeKamera();
+camera.position.set(0, 11, 10);
+camera.up.set( 0, 1, 0 );
+camera.lookAt(scene.position);
 
 scene.add(camera);
 
@@ -169,9 +163,9 @@ scene.add(spielfiguren);
 
 // Maussteuerung
 
-controls = new THREE.OrbitControls( camera );
-controls.damping = 0.2;
-controls.addEventListener( 'change', render );
+// controls = new THREE.OrbitControls( camera );
+// controls.damping = 0.2;
+// controls.addEventListener( 'change', render );
 
 // Loop-Funktion aufrufen
 var render = function() {

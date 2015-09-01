@@ -16,15 +16,6 @@ body {
 	}
 }
 
-.pause {
-	position: relative;
-	button {
-		position: absolute;
-		right: 10px;	
-		bottom: 10px;
-	}
-}
-
 .anzahl_spieler {
 	padding-bottom: 1.5em;
 	font-size: 1.4em;
@@ -61,24 +52,6 @@ body {
 
 }
 
-.wuerfeln {
-	position: relative;
-	button {
-		position: absolute;
-		left: 10px;	
-		bottom: 10px;
-	}
-}
-
-.drehen {
-	position: relative;
-	button {
-		position: absolute;
-		left: 50%;	
-		bottom: 10px;
-	}
-}
-
 #modal_wuerfeln .ergebnis {
 	position: absolute;
 	opacity: 0;
@@ -87,28 +60,30 @@ body {
 	transform: translate(-50%, -50%);
 }
 
-#ausgabe {
-	width: 60%;
-	height: 38px;
-	position: absolute;
-	top: 10px;
-	left: 50%;
-	transform: translateX(-50%);
-	overflow: hidden;
+%button {
 	font-size: 24px;
-	text-align: center;
-	border: 1px solid #eee;
-	box-shadow: 0 10px 6px -6px #777;
+	padding: 10px 20px 10px 20px;
+	background-color: white;
+	border: none;
+}
 
-	.wrap {
-		top: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		position: absolute;
+.header {
+	width: 100%;
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 0 5px 10px 0px #777;
+
+	button {
+		@extend %button;
 	}
 
-	p {
-		margin: 0;
-		padding: 2px 0;
+	#ausgabe {
+		flex: 3;
+		text-align: center;
+		border-left: 1px solid #eee;
+		border-right: 1px solid #eee;
+	@extend %button;
+
 	}
 }
