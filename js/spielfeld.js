@@ -271,27 +271,27 @@ for (var i = 0; i < 4; i++) {
 
   if (i === 0) {
     for (var j = 0; j < 4; j++) {
-      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialRot);
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
       hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialRot);
     }
   }
   if (i === 1) {
     for (var j = 0; j < 4; j++) {
-      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialRot);
       hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialBlau);
 
     }
   }
   if (i === 2) {
     for (var j = 0; j < 4; j++) {
-      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
       hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
 
     }
   }
   if (i === 3) {
     for (var j = 0; j < 4; j++) {
-      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
+      gewinnfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGruen);
       hausfelder[i][j] = new THREE.Mesh(cylinderGeometry, materialGelb);
 
     }
@@ -303,40 +303,40 @@ hausfelder[0][0].position.set(-5, 0, -5);
 hausfelder[0][1].position.set(-4, 0, -5);
 hausfelder[0][2].position.set(-4, 0, -4);
 hausfelder[0][3].position.set(-5, 0, -4);
-gewinnfelder[0][0].position.set(-4, 0, 0);
-gewinnfelder[0][1].position.set(-3, 0, 0);
-gewinnfelder[0][2].position.set(-2, 0, 0);
-gewinnfelder[0][3].position.set(-1, 0, 0);
+gewinnfelder[1][0].position.set(-4, 0, 0);
+gewinnfelder[1][1].position.set(-3, 0, 0);
+gewinnfelder[1][2].position.set(-2, 0, 0);
+gewinnfelder[1][3].position.set(-1, 0, 0);
 
 // Positionen fuer Blau
 hausfelder[1][0].position.set(-5, 0, 5);
 hausfelder[1][1].position.set(-5, 0, 4);
 hausfelder[1][2].position.set(-4, 0, 4);
 hausfelder[1][3].position.set(-4, 0, 5);
-gewinnfelder[1][0].position.set(0, 0, 4);
-gewinnfelder[1][1].position.set(0, 0, 3);
-gewinnfelder[1][2].position.set(0, 0, 2);
-gewinnfelder[1][3].position.set(0, 0, 1);
+gewinnfelder[0][0].position.set(0, 0, 4);
+gewinnfelder[0][1].position.set(0, 0, 3);
+gewinnfelder[0][2].position.set(0, 0, 2);
+gewinnfelder[0][3].position.set(0, 0, 1);
 
 // Positionen fuer Gruen
 hausfelder[2][0].position.set(5, 0, 5);
 hausfelder[2][1].position.set(4, 0, 5);
 hausfelder[2][2].position.set(4, 0, 4);
 hausfelder[2][3].position.set(5, 0, 4);
-gewinnfelder[2][0].position.set(4, 0, 0);
-gewinnfelder[2][1].position.set(3, 0, 0);
-gewinnfelder[2][2].position.set(2, 0, 0);
-gewinnfelder[2][3].position.set(1, 0, 0);
+gewinnfelder[3][0].position.set(4, 0, 0);
+gewinnfelder[3][1].position.set(3, 0, 0);
+gewinnfelder[3][2].position.set(2, 0, 0);
+gewinnfelder[3][3].position.set(1, 0, 0);
 
 // Positionen fuer Gelb
 hausfelder[3][0].position.set(5, 0, -5);
 hausfelder[3][1].position.set(5, 0, -4);
 hausfelder[3][2].position.set(4, 0, -4);
 hausfelder[3][3].position.set(4, 0, -5);
-gewinnfelder[3][0].position.set(0, 0, -4);
-gewinnfelder[3][1].position.set(0, 0, -3);
-gewinnfelder[3][2].position.set(0, 0, -2);
-gewinnfelder[3][3].position.set(0, 0, -1);
+gewinnfelder[2][0].position.set(0, 0, -4);
+gewinnfelder[2][1].position.set(0, 0, -3);
+gewinnfelder[2][2].position.set(0, 0, -2);
+gewinnfelder[2][3].position.set(0, 0, -1);
 
 for (var i = 0; i < 4; i++) {
   for (var j = 0; j < 4; j++) {

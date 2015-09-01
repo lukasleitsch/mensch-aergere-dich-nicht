@@ -15,6 +15,7 @@ var gewuerfelt = false;                 // Sperrvariable
  * Spielfeld wird dementsprechend gedreht.
  */
 function wechsleSpieler() {
+  gewuerfelt = false;
   counter = 0;
   spielernummer = (spielernummer + 1) % anzahlSpieler;
   spielfeldDrehen(spielernummer);
@@ -179,38 +180,79 @@ function setzeHut(figur) {
     } else {
       var tween;
       //Erstellt ein Array mit der Anwzahl benötigter Animationen
-      delete spielfelder[figur.aktuellePos].besetzt;
-
-      if (spielfelder[(figur.aktuellePos + wuerfelZahl) % spielfelder.length].besetzt) {
-        tween = new Array(wuerfelZahl + 1);
-      } else {
-        tween = new Array(wuerfelZahl);
-      }
-      //Initialisiert die Animationen fuer jedes Feld
-      for (var i = 0; i < tween.length; i++) {
-        //Erstellt die einzelnen Animationen
-        tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
-        //Weißt das naechste Feld zu
-        figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
-        //Erstellt die Animation fuer das Rauswerfen
-        if (tween.length > wuerfelZahl && i === wuerfelZahl - 2) {
-          tween[i + 1] = rauswerfen((figur.aktuellePos + 1) % spielfelder.length);
-          i = i + 1;
+      if ((spielerArr[spielernummer].start + 40 - wuerfelZahl) % spielfelder.length <= figur.aktuellePos) {
+        if (!pruefeFrei(figur)) {
+          ausgabe("Gewinnfeld bereits besetzt..");
+          wechsleSpieler();
+        }
+        else {
+          tween = new Array();
+          delete spielfelder[figur.aktuellePos].besetzt;
+          // Merkvariable
+          var merkeZahl = wuerfelZahl;
+          var merkeFeld = wuerfelZahl - (figur.aktuellePos - (spielerArr[spielernummer].start + 39 - wuerfelZahl)
+                  % spielfelder.length) - 1;
+          // Setzt das Attribut 'Besetzt' auf dem neuen Feld
+          gewinnfelder[spielernummer][merkeFeld].besetzt = figur;
+          while (((figur.aktuellePos + 1) % spielfelder.length) !== spielerArr[spielernummer].start) {
+            var temp = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut);
+            tween.push(temp);
+            figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
+            merkeZahl--;
+          }
+          for (i = 0; i < merkeZahl; i ++){
+            var temp = new TWEEN.Tween(figur.position).to(gewinnfelder[spielernummer][i].position, 500).easing(TWEEN.Easing.Elastic.InOut);
+            tween.push(temp);
+          }
+          //Verkettet die Animationen
+        for (var i = 0; i < tween.length - 1; i++) {
+          tween[i].chain(tween[i + 1]);
+        }
+        //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
+        if (wuerfelZahl !== 6) {
+          tween[tween.length - 1].onComplete(function() {
+            wechsleSpieler();
+          });
+        }
+        //Startet die Animationen und den Setzvorgang
+        tween[0].start();
+        figur.aktuellePos = gewinnfelder[spielernummer][merkeFeld];
+        console.log(figur.aktuellePos);
         }
       }
-      //Verkettet die Animationen
-      for (var i = 0; i < tween.length - 1; i++) {
-        tween[i].chain(tween[i + 1]);
+      else {
+        delete spielfelder[figur.aktuellePos].besetzt;
+        if (spielfelder[(figur.aktuellePos + wuerfelZahl) % spielfelder.length].besetzt) {
+          tween = new Array(wuerfelZahl + 1);
+        } else {
+          tween = new Array(wuerfelZahl);
+        }
+        //Initialisiert die Animationen fuer jedes Feld
+        for (var i = 0; i < tween.length; i++) {
+          //Erstellt die einzelnen Animationen
+          tween[i] = new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.                                         Elastic.InOut);
+          //Weißt das naechste Feld zu
+          figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
+          //Erstellt die Animation fuer das Rauswerfen
+          if (tween.length > wuerfelZahl && i === wuerfelZahl - 2) {
+            tween[i + 1] = rauswerfen((figur.aktuellePos + 1) % spielfelder.length);
+            i = i + 1;
+          }
+        }
+        //Verkettet die Animationen
+        for (var i = 0; i < tween.length - 1; i++) {
+          tween[i].chain(tween[i + 1]);
+        }
+        //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
+        if (wuerfelZahl !== 6) {
+          tween[tween.length - 1].onComplete(function() {
+            wechsleSpieler();
+          });
+        }
+        //Startet die Animationen und den Setzvorgang
+        tween[0].start();
+        spielfelder[figur.aktuellePos].besetzt = figur;
       }
-      //Hat der Spieler eine 6 gewuerfelt darf er nochmals wuerfeln
-      if (wuerfelZahl !== 6) {
-        tween[tween.length - 1].onComplete(function() {
-          wechsleSpieler();
-        });
-      }
-      //Startet die Animationen und den Setzvorgang
-      tween[0].start();
-      spielfelder[figur.aktuellePos].besetzt = figur;
     }
   }
 }
@@ -246,26 +288,9 @@ function ausweichen(feldnummer, animation) {
  * @returns {boolean} false wenn es besetzt ist, true andernfalls 
  */
 function pruefeFrei(hut) {
-
-}
-
-/*
- * Ueberprueft, ob es mit der aktuellen Wuerfelzahl moeglich ist auf ein HausFeld
- * zu gelangen
- * @returns {boolean} true wenn moeglich, false andernfalls
- */
-function pruefeWeg(hut) {
-  if (spielernummer === 0) {
-    if ((spielerArr[spielernummer].start + 40 - wuerfelZahl) % spielfelder.length <= hut.aktuellePos
-            && (hut.aktuellePos + 1 - spielfelder.length) % spielfelder.length + hausfelder[spielernummer].length <= wuerfelZahl) {
-      return true;
-    }
-  }
-  else {
-    if ((spielerArr[spielernummer].start + 40 - wuerfelZahl) % spielfelder.length <= hut.aktuellePos
-            && (spielerArr[spielernummer].start + 40 - hut.aktuellePos - 1 + 40) + hausfelder[spielernummer].length <= wuerfelZahl) {
-      return true;
-    }
+  if (typeof gewinnfelder[spielernummer][wuerfelZahl - (hut.aktuellePos - (spielerArr[spielernummer].start + 39 - wuerfelZahl)
+          % spielfelder.length) - 1].besetzt === 'undefined') {
+    return true;
   }
   return false;
 }
