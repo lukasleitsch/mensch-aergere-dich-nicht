@@ -20,6 +20,9 @@ function wechsleSpieler() {
   spielernummer = (spielernummer + 1) % anzahlSpieler;
   spielfeldDrehen(spielernummer);
   ausgabe(spielerArr[spielernummer].name + " ist an der Reihe.");
+  setTimeout(function() {
+        ausgabe("Bitte Würfeln.");
+      }, 2000);
 }
 
 /*
@@ -90,12 +93,21 @@ function wuerfeln() {
         $('#modal_wuerfeln').modal('hide');
       })
     }
-    if ((!spielerArr[spielernummer].figure1.aktuellePos && !spielerArr[spielernummer].figure2.aktuellePos
-            && !spielerArr[spielernummer].figure3.aktuellePos && !spielerArr[spielernummer].figure4.aktuellePos) && wuerfelZahl !== 6) {
+    if (typeof spielerArr[spielernummer].figure1.aktuellePos === 'undefined' 
+            && typeof spielerArr[spielernummer].figure2.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figure3.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figure4.aktuellePos === 'undefined' 
+            && wuerfelZahl !== 6) {
       counter++;
+      setTimeout(function() {
+        ausgabe("Noch " +(3 - counter) +" Versuche.");
+      }, 4000);
     }
     else {
       gewuerfelt = true;
+      setTimeout(function() {
+        ausgabe("Bitte Figur setzen.");
+      }, 4000);
     }
     if (counter === 3 && wuerfelZahl !== 6) {
       setTimeout(function() {
@@ -105,7 +117,7 @@ function wuerfeln() {
   }
   else
   {
-    ausgabe("Bitte erst setzen");
+    ausgabe("Bitte erst setzen.");
   }
 
 }
@@ -180,6 +192,7 @@ function setzeHut(figur) {
         spielfelder[figur.aktuellePos].besetzt = figur;
         counter = 0;
         gewuerfelt = false;
+        ausgabe("Nochmal Würfeln.");
       }
     }
     else {
@@ -203,6 +216,7 @@ function setzeHut(figur) {
           else {
             if (merkeZahl === 1 && spielfelder[(figur.aktuellePos + 1) % spielfelder.length].besetzt) {
               tween.push(rauswerfen(figur.aktuellePos + 1));
+              ausgabe("Rausgeworfen!");
             }
             tween.push(new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut));
             //Weißt das naechste Feld zu
@@ -218,6 +232,11 @@ function setzeHut(figur) {
         if (wuerfelZahl !== 6) {
           tween[tween.length - 1].onComplete(function() {
             wechsleSpieler();
+          });
+        }
+        else{
+            tween[tween.length - 1].onComplete(function() {
+            ausgabe("Nochmal Würfeln.");
           });
         }
         //Startet die Animationen und den Setzvorgang
