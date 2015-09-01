@@ -326,7 +326,6 @@ function ausgabe(text){
     $ausgabe = $('#ausgabe .wrap');
     $ausgabe.append('<p>' + text + '</p>');
     var offset = parseInt($ausgabe.css('top')) - 38;
-    console.log(offset);
     $ausgabe.animate({
         top: offset+"px",
   }, 1500 );
