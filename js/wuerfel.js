@@ -61,7 +61,6 @@ sceneWuerfel.add( wuerfelCube );
 // Loop-Funktion aufrufen
 var renderWuerfel = function() {
   requestAnimationFrame(renderWuerfel);
-  //cube.rotation.x += 0.1;
 
   rendererWuerfel.render(sceneWuerfel, cameraWuerfel);
   TWEEN.update();

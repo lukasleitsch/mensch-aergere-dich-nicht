@@ -130,16 +130,16 @@ function spielfeldDrehen(count) {
 
   switch (count) {
     case 0:
-      KameraDrehen(0, 10, 10);
+      KameraDrehen(0, 11, 11);
       break;
     case 1:
-      KameraDrehen(-10, 10, 0);
+      KameraDrehen(-11, 11, 0);
       break;
     case 2:
-      KameraDrehen(0, 10, -10);
+      KameraDrehen(0, 11, -11);
       break;
     case 3:
-      KameraDrehen(10, 10, 0);
+      KameraDrehen(11, 11, 0);
       break;
   }
 }
@@ -349,10 +349,7 @@ window.addEventListener('mousedown', onMouseDown, false);
 // Ausgabe
 
 function ausgabe(text) {
-  $ausgabe = $('#ausgabe .wrap');
-  $ausgabe.append('<p>' + text + '</p>');
-  var offset = parseInt($ausgabe.css('top')) - 38;
-  $ausgabe.animate({
-    top: offset + "px",
-  }, 1500);
+  $('#ausgabe .content').fadeOut(600, function() {
+    $(this).html(text).fadeIn(600);
+  });
 }
