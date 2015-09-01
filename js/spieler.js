@@ -3,7 +3,7 @@ var spielerArr = new Array(4);             //Spielerobjekte
 // Initialisiere SpielerBlau
 var spielerBlau = {
 	aktiv: "",
-	name: "",
+	name: "Blau",
 	farbe: 0x2600FF,
 	haus1: {
 		x: hausfelder[1][0].position.x,
@@ -50,7 +50,7 @@ spielerArr[0] = spielerBlau;
 // Initialisiere SpielerRot
 var spielerRot = {
 	aktiv: "",
-	name: "",
+	name: "Rot",
 	farbe: 0xFF0000,
 	haus1: {
 		x: hausfelder[0][0].position.x,
@@ -96,7 +96,7 @@ spielerArr[1] = spielerRot;
 // Initialisiere SpielerGeld
 var spielerGelb = {
 	aktiv: "",
-	name: "",
+	name: "Gelb",
 	farbe: 0xFFFC00, 
 	haus1: {
 		x: hausfelder[3][0].position.x,
@@ -143,7 +143,7 @@ spielerArr[2] = spielerGelb;
 
 var spielerGruen = {
 	aktiv: "",
-	name: "",
+	name: "Grün",
 	farbe: 0x2EAE00,
 	haus1: {
 		x: hausfelder[2][0].position.x,

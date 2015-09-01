@@ -18,6 +18,7 @@ function wechsleSpieler() {
     counter = 0;
     spielernummer = (spielernummer + 1) % anzahlSpieler;
     spielfeldDrehen(spielernummer);
+    ausgabe("Spieler " + spielerArr[spielernummer].name + " ist an der Reihe.");
 }
 
 /*
@@ -103,7 +104,7 @@ function wuerfeln() {
     }
     else
     {
-        console.log("Bitte erst setzen");
+        ausgbe("Bitte erst setzen");
     }
 }
 
@@ -358,3 +359,15 @@ function onMouseDown(event) {
 //EventListener für Maus-Events
 window.addEventListener('mousemove', onMouseMove, false);
 window.addEventListener('mousedown', onMouseDown, false);
+
+// Ausgabe
+
+function ausgabe(text){
+    $ausgabe = $('#ausgabe .wrap');
+    $ausgabe.append('<p>' + text + '</p>');
+    var offset = parseInt($ausgabe.css('top')) - 38;
+    console.log(offset);
+    $ausgabe.animate({
+        top: offset+"px",
+  }, 1500 );
+}
