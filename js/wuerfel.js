@@ -53,7 +53,7 @@ for (var i = 0; i < 6; i++)
   map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] + imageSuffix )
 }));
 
-var geometry = new THREE.BoxGeometry( 5, 5, 5 );
+var geometry = new THREE.BoxGeometry( 7, 7, 7 );
 var material = new THREE.MeshFaceMaterial(materialArray);
 var wuerfelCube = new THREE.Mesh( geometry, material );
 sceneWuerfel.add( wuerfelCube );

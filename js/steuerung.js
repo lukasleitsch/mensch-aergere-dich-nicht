@@ -87,7 +87,6 @@ function wuerfeln() {
         fontSize: "28em",
       }, 1000).delay(1000).fadeOut('fast', function() {
         $('#modal_wuerfeln').modal('hide');
-        ausgabe(spielerArr[spielernummer].name + " bitte Figur setzen.");
       })
     }
     if ((!spielerArr[spielernummer].figure1.aktuellePos && !spielerArr[spielernummer].figure2.aktuellePos
@@ -346,10 +345,6 @@ function onMouseDown(event) {
       setzeHut(intersects[0].object.parent);
       spielfelder[intersects[0].object.parent.aktuellePos].material.color.setHex(0xffffff);
     }
-  }
-
-  if(!gewuerfelt){
-    ausgabe("Bitte würfeln!");
   }
 }
 

@@ -150,6 +150,19 @@ setzeKamera();
 
 scene.add(camera);
 
+// Resize
+
+window.addEventListener( 'resize', onWindowResize, false );
+
+function onWindowResize(){
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize($(window).width()-3, $(window).height()-5);
+
+}
+
 // Spielfiguren der Scene hinzufügen
 
 scene.add(spielfiguren);
