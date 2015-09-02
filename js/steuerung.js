@@ -37,8 +37,8 @@ function wuerfeln() {
 
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
     // var zahl = Math.floor((Math.random() * 6) + 1);
-    // wuerfelZahl = Math.floor((Math.random() * 6) + 1);
-    wuerfelZahl = 6;
+    wuerfelZahl = Math.floor((Math.random() * 6) + 1);
+    // wuerfelZahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
