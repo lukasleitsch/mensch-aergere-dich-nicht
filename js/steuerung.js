@@ -220,12 +220,12 @@ function setzeHut (figur) {
           else {
             //Rauswerfen sofern das letzte Feld besetzt ist
             if (merkeZahl === 1 && spielfelder[(figur.aktuellePos + 1) % spielfelder.length].besetzt) {
-              tween.push (rauswerfen (figur.aktuellePos + 1));
+              tween.push (rauswerfen ((figur.aktuellePos + 1) % spielfelder.length));
               ausgabe ("Rausgeworfen!");
             }
             //Laesst die Figur auf einem Feld ausweichen
             if (merkeZahl !== 1 && spielfelder[(figur.aktuellePos + 1) % spielfelder.length].besetzt) {
-              tween = ausweichen(tween, figur);
+              tween = ausweichen (tween, figur);
               merkeZahl--;
             }
             else {
@@ -284,11 +284,17 @@ function rauswerfen (feldnummer) {
   return rauswurf;
 }
 
+/*
+ * Leitet ein Ausweichmanoever fuer die Spielfigur ein, welche auf dem Weg sitzt
+ * @param {TWEEN} tween - bisherige TWEEN-Animationen
+ * @param {Figur} figur - zu setzende Spielfigur
+ * @returns {TWEEN} - neues Array mit Ausweichanimationen
+ */
 function ausweichen (tween, figur) {
   // Ermittle Figur
   var ausweichendeFigur = spielfelder[figur.aktuellePos + 1].besetzt;
   // Animation zum nach oben Ausweichen, Setzen und Zuruecksetzen
-  tween.push(new TWEEN.Tween (ausweichendeFigur.position).to ({x : ausweichendeFigur.position.x, y : 2, z : ausweichendeFigur.position.z}, 500).easing (TWEEN.Easing.Elastic.InOut));
+  tween.push (new TWEEN.Tween (ausweichendeFigur.position).to ({x : ausweichendeFigur.position.x, y : 2, z : ausweichendeFigur.position.z}, 500).easing (TWEEN.Easing.Elastic.InOut));
   tween.push (new TWEEN.Tween (figur.position).to (spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing (TWEEN.Easing.Elastic.InOut));
   figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
   tween.push (new TWEEN.Tween (figur.position).to (spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing (TWEEN.Easing.Elastic.InOut));
@@ -297,6 +303,12 @@ function ausweichen (tween, figur) {
   return tween;
 }
 
+/*
+ * Ueberprueft den zu setzenden Weg, ob er sich noch im Feld befindet, oder ob
+ * es darueber hinaus laeuft
+ * @param {Figur} figur
+ * @returns {Boolean}
+ */
 function pruefeWeg (figur) {
   var spieler = spielerArr[spielernummer];
   //differenz
