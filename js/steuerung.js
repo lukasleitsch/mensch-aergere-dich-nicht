@@ -20,15 +20,9 @@ function wechsleSpieler() {
   spielernummer = (spielernummer + 1) % anzahlSpieler;
   spielfeldDrehen(spielernummer);
   ausgabe(spielerArr[spielernummer].name + " ist an der Reihe.");
-<<<<<<< HEAD
-  setTimeout(function() {
-        ausgabe("Bitte Würfeln.");
-      }, 2000);
-=======
   setTimeout(function () {
     ausgabe("Bitte Würfeln.");
   }, 2000);
->>>>>>> 0bebb396030f3efe147f93ac5e8e6bebd0a56ac1
 }
 
 /*
@@ -99,10 +93,10 @@ function wuerfeln() {
         $('#modal_wuerfeln').modal('hide');
       })
     }
-    if (typeof spielerArr[spielernummer].figure1.aktuellePos === 'undefined'
-            && typeof spielerArr[spielernummer].figure2.aktuellePos === 'undefined'
-            && typeof spielerArr[spielernummer].figure3.aktuellePos === 'undefined'
-            && typeof spielerArr[spielernummer].figure4.aktuellePos === 'undefined'
+    if (typeof spielerArr[spielernummer].figur1.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figur2.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figur3.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figur4.aktuellePos === 'undefined'
             && wuerfelZahl !== 6) {
       counter++;
       setTimeout(function () {
@@ -229,11 +223,7 @@ function setzeHut(figur) {
               ausgabe("Rausgeworfen!");
             }
             tween.push(new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut));
-<<<<<<< HEAD
             //Weißt das naechste Feld zu
-=======
-            //Wei�t das naechste Feld zu
->>>>>>> 0bebb396030f3efe147f93ac5e8e6bebd0a56ac1
             figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
           }
           merkeZahl--;
@@ -248,13 +238,8 @@ function setzeHut(figur) {
             wechsleSpieler();
           });
         }
-<<<<<<< HEAD
         else{
             tween[tween.length - 1].onComplete(function() {
-=======
-        else {
-          tween[tween.length - 1].onComplete(function () {
->>>>>>> 0bebb396030f3efe147f93ac5e8e6bebd0a56ac1
             ausgabe("Nochmal Würfeln.");
           });
         }
@@ -318,7 +303,7 @@ function pruefeWeg(figur) {
 // Maus-Events
 
 /*
- * Maus-Over Effekt fuer die Spielfiguren. Wurde gewuerfelt und alle Bedingungen
+ * Maus-Over Effekt fuer die spielfigurn. Wurde gewuerfelt und alle Bedingungen
  * sind erfuellt, so faerbt sich das zu erreichende Spielfeld, von dem sich 
  * unter dem Mauszeiger befindliche Spielerhuetchen, rot
  */
@@ -335,7 +320,7 @@ function onMouseMove(event) {
     // update the picking ray with the camera and mouse position 
     raycaster.setFromCamera(mouse, camera);
     // calculate objects intersecting the picking ray
-    var intersects = raycaster.intersectObjects(spielfiguren.children, true);
+    var intersects = raycaster.intersectObjects(spielfigurn.children, true);
     if (intersects.length) {
       if (spielernummer === intersects[0].object.parent.spielernummer) {
         if (typeof intersects[0].object.parent.aktuellePos === 'undefined' && wuerfelZahl === 6) {
@@ -379,7 +364,7 @@ function onMouseDown(event) {
   // update the picking ray with the camera and mouse position 
   raycaster.setFromCamera(mouse, camera);
   // calculate objects intersecting the picking ray
-  var intersects = raycaster.intersectObjects(spielfiguren.children, true);
+  var intersects = raycaster.intersectObjects(spielfigurn.children, true);
   if (intersects.length) {
 // Nur aktiver Spieler darf Figuren setzen
     if (spielernummer === intersects[0].object.parent.spielernummer) {
