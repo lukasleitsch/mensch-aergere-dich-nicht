@@ -1,6 +1,6 @@
 /* 
  * Dieses Script erstellt das Spielmenue, welches zu Beginn des Spiels und
- * während des Spiels aufgerufen werden kann.
+ * wÃ¤hrend des Spiels aufgerufen werden kann.
  */
 
 /*
@@ -14,11 +14,11 @@ $(function() {
 
   var anzahl_spieler = 2;
 
-  // Zeige Menü nach dem Laden der Seite
+  // Zeige Menï¿½ nach dem Laden der Seite
   // $('#menu').modal();
 
 
-  // Speichern des Menüs
+  // Speichern des MenÃ¼s
   $('#menue_speichern').click(function(event) {
     $('#menu').modal('hide');
   });
@@ -46,27 +46,27 @@ $(function() {
     }
   });
 
-  // Zeige Menue, wenn der Button Pause gedrückt wird
+  // Zeige Menue, wenn der Button Pause gedrÃ¼ckt wird
 
   $('button.pause').click(function(event) {
     $('#menu').modal('show');
   });
 
 
-  // Farbe für Spieler festhalten und gleiche Farbe für andere Spieler deaktivieren
+  // Farbe fÃ¼r Spieler festhalten und gleiche Farbe fÃ¼r andere Spieler deaktivieren
 
   $('.spieler_farben span').each(function(index, el) {
     $(this).click(function(event) {
-      // Setze alle aktiven Farben zurück
+      // Setze alle aktiven Farben zurÃ¼ck
       $(this).parent().find('span').each(function(index, el) {
         $(this).removeClass('active');
       });
-      // Ausgewählte Farbe als aktiv setzen
+      // AusgewÃ¤hlte Farbe als aktiv setzen
       $(this).addClass('active');
       farben_spieler[$(this).parent().attr('class')] = $(this).attr('class').split(' ')[0];
       var aktuelle_farbe = $(this).attr('class').split(' ')[0];
       var aktuelle_active = $(this).attr('class').split(' ')[1];
-      // Die ausgewählte Farbe für andere Spieler deaktivieren
+      // Die ausgewÃ¤hlte Farbe fÃ¼r andere Spieler deaktivieren
       $('.spieler_farben span').each(function(index, el) {
         if ($(this).hasClass(aktuelle_farbe) && !$(this).hasClass(aktuelle_active)) {
           $(this).addClass('disabled');
@@ -78,7 +78,7 @@ $(function() {
 
 
 /*
- * Erstellt ein Pausenmenue das während des Spiels geoeffnet und geschlossen
+ * Erstellt ein Pausenmenue das wÃ¤hrend des Spiels geoeffnet und geschlossen
  * werden kann
  */
 function erstelleSpielmenue() {
