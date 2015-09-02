@@ -21,12 +21,12 @@ function wechsleSpieler() {
   spielfeldDrehen(spielernummer);
   ausgabe(spielerArr[spielernummer].name + " ist an der Reihe.");
   setTimeout(function() {
-        ausgabe("Bitte W�rfeln.");
+        ausgabe("Bitte Würfeln.");
       }, 2000);
 }
 
 /*
- * Öffnet ein Overlay, in dem sich der Wuerfel aufgrund der generierten 
+ * Ã–ffnet ein Overlay, in dem sich der Wuerfel aufgrund der generierten 
  * Zufallszahl dreht und anzeigt
  */
 function wuerfeln() {
@@ -43,7 +43,7 @@ function wuerfeln() {
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
 
-    //Öffnet Fenster
+    //Ã–ffnet Fenster
     $('#modal_wuerfeln').modal('show');
     rendererWuerfel.setSize($('#modal_wuerfeln .modal-body').width(), 300);
 
@@ -157,7 +157,7 @@ function spielfeldDrehen(count) {
 }
 
 /*
- * Startet ein Event wenn man den Button 'Würfeln' drueckt
+ * Startet ein Event wenn man den Button 'WÃ¼rfeln' drueckt
  */
 $(function() {
   $('button.wuerfeln').click(function(event) {
@@ -192,7 +192,7 @@ function setzeHut(figur) {
         spielfelder[figur.aktuellePos].besetzt = figur;
         counter = 0;
         gewuerfelt = false;
-        ausgabe("Nochmal W�rfeln.");
+        ausgabe("Nochmal Würfeln.");
       }
     }
     else {
@@ -219,7 +219,7 @@ function setzeHut(figur) {
               ausgabe("Rausgeworfen!");
             }
             tween.push(new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut));
-            //Wei�t das naechste Feld zu
+            //Weißt das naechste Feld zu
             figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
           }
           merkeZahl--;
@@ -236,7 +236,7 @@ function setzeHut(figur) {
         }
         else{
             tween[tween.length - 1].onComplete(function() {
-            ausgabe("Nochmal W�rfeln.");
+            ausgabe("Nochmal Würfeln.");
           });
         }
         //Startet die Animationen und den Setzvorgang
@@ -362,7 +362,7 @@ function onMouseDown(event) {
   }
 }
 
-//EventListener für Maus-Events
+//EventListener fÃ¼r Maus-Events
 window.addEventListener('mousemove', onMouseMove, false);
 window.addEventListener('mousedown', onMouseDown, false);
 // Ausgabe
