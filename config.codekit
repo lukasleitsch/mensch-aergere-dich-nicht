@@ -262,17 +262,6 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/spieler.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/spieler.js",
-		"outputAbbreviatedPath": "\/js\/min\/spieler-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
-		"syntaxCheckerStyle": 0
-		},
 	"\/js\/spielfeld.js": {
 		"fileType": 64,
 		"ignore": 1,

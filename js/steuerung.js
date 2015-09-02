@@ -26,7 +26,7 @@ function wechsleSpieler() {
 }
 
 /*
- * Öffnet ein Overlay, in dem sich der Wuerfel aufgrund der generierten 
+ * Ã–ffnet ein Overlay, in dem sich der Wuerfel aufgrund der generierten 
  * Zufallszahl dreht und anzeigt
  */
 function wuerfeln() {
@@ -43,7 +43,7 @@ function wuerfeln() {
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
 
-    //Öffnet Fenster
+    //Ã–ffnet Fenster
     $('#modal_wuerfeln').modal('show');
     rendererWuerfel.setSize($('#modal_wuerfeln .modal-body').width(), 300);
 
@@ -93,10 +93,10 @@ function wuerfeln() {
         $('#modal_wuerfeln').modal('hide');
       })
     }
-    if (typeof spielerArr[spielernummer].figure1.aktuellePos === 'undefined'
-            && typeof spielerArr[spielernummer].figure2.aktuellePos === 'undefined'
-            && typeof spielerArr[spielernummer].figure3.aktuellePos === 'undefined'
-            && typeof spielerArr[spielernummer].figure4.aktuellePos === 'undefined'
+    if (typeof spielerArr[spielernummer].figur1.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figur2.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figur3.aktuellePos === 'undefined'
+            && typeof spielerArr[spielernummer].figur4.aktuellePos === 'undefined'
             && wuerfelZahl !== 6) {
       counter++;
       setTimeout(function () {
@@ -157,7 +157,7 @@ function spielfeldDrehen(count) {
 }
 
 /*
- * Startet ein Event wenn man den Button 'Würfeln' drueckt
+ * Startet ein Event wenn man den Button 'WÃ¼rfeln' drueckt
  */
 $(function () {
   $('button.wuerfeln').click(function (event) {
@@ -223,7 +223,7 @@ function setzeHut(figur) {
               ausgabe("Rausgeworfen!");
             }
             tween.push(new TWEEN.Tween(figur.position).to(spielfelder[(figur.aktuellePos + 1) % spielfelder.length].position, 500).easing(TWEEN.Easing.Elastic.InOut));
-            //Wei�t das naechste Feld zu
+            //Weißt das naechste Feld zu
             figur.aktuellePos = (figur.aktuellePos + 1) % spielfelder.length;
           }
           merkeZahl--;
@@ -238,8 +238,8 @@ function setzeHut(figur) {
             wechsleSpieler();
           });
         }
-        else {
-          tween[tween.length - 1].onComplete(function () {
+        else{
+            tween[tween.length - 1].onComplete(function() {
             ausgabe("Nochmal Würfeln.");
           });
         }
@@ -303,7 +303,7 @@ function pruefeWeg(figur) {
 // Maus-Events
 
 /*
- * Maus-Over Effekt fuer die Spielfiguren. Wurde gewuerfelt und alle Bedingungen
+ * Maus-Over Effekt fuer die spielfigurn. Wurde gewuerfelt und alle Bedingungen
  * sind erfuellt, so faerbt sich das zu erreichende Spielfeld, von dem sich 
  * unter dem Mauszeiger befindliche Spielerhuetchen, rot
  */
@@ -320,7 +320,7 @@ function onMouseMove(event) {
     // update the picking ray with the camera and mouse position 
     raycaster.setFromCamera(mouse, camera);
     // calculate objects intersecting the picking ray
-    var intersects = raycaster.intersectObjects(spielfiguren.children, true);
+    var intersects = raycaster.intersectObjects(spielfigurn.children, true);
     if (intersects.length) {
       if (spielernummer === intersects[0].object.parent.spielernummer) {
         if (typeof intersects[0].object.parent.aktuellePos === 'undefined' && wuerfelZahl === 6) {
@@ -364,7 +364,7 @@ function onMouseDown(event) {
   // update the picking ray with the camera and mouse position 
   raycaster.setFromCamera(mouse, camera);
   // calculate objects intersecting the picking ray
-  var intersects = raycaster.intersectObjects(spielfiguren.children, true);
+  var intersects = raycaster.intersectObjects(spielfigurn.children, true);
   if (intersects.length) {
 // Nur aktiver Spieler darf Figuren setzen
     if (spielernummer === intersects[0].object.parent.spielernummer) {
@@ -379,7 +379,7 @@ function onMouseDown(event) {
   }
 }
 
-//EventListener für Maus-Events
+//EventListener fÃ¼r Maus-Events
 window.addEventListener('mousemove', onMouseMove, false);
 window.addEventListener('mousedown', onMouseDown, false);
 // Ausgabe
