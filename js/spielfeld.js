@@ -5,12 +5,12 @@
 
  //////////////////////////////////////////////////
  // Variablen
- /////////////////////////////////////////////////
+ //////////////////////////////////////////////////
 
  var spielfelder = new Array(40);
  var gewinnfelder = new Array(4);
  var hausfelder = new Array(4);
- var spielfigurn = new THREE.Object3D();
+ var spielfiguren = new THREE.Object3D();
 
 // Variablen und Werte fuer die Spielfelder
 var radius = 0.35;
@@ -54,7 +54,7 @@ var spielerGruen = {
 
 //////////////////////////////////////////////////
 // Funktionen
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
 // Spielfigur
 
@@ -63,7 +63,6 @@ function spielfigur(color, hausfeld) {
   group = new THREE.Object3D();
 
     // Fuß
-
     var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.15, segmente );
     var material = new THREE.MeshPhongMaterial( {color: color} );
     var cylinder = new THREE.Mesh( geometry, material );
@@ -72,9 +71,7 @@ function spielfigur(color, hausfeld) {
     cylinder.translateY(0.075);
     group.add(cylinder);
 
-
     //Körper
-
     var geometry = new THREE.CylinderGeometry( 0, 0.3, 1, segmente );
     var material = new THREE.MeshPhongMaterial( {color: color} );
     var cylinder = new THREE.Mesh( geometry, material );
@@ -84,7 +81,6 @@ function spielfigur(color, hausfeld) {
     group.add(cylinder);
 
     // Kopf
-
     var geometry = new THREE.SphereGeometry( 0.23, 32, segmente );
     var material = new THREE.MeshPhongMaterial( {color: color} );
     var sphere = new THREE.Mesh( geometry, material );
@@ -94,10 +90,11 @@ function spielfigur(color, hausfeld) {
 
     group.add(sphere);
     group.position.set(hausfeld.position.x, 15, hausfeld.position.z);
-    spielfigurn.add(group);
+    spielfiguren.add(group);
 
     return group;
   }
+  
 //////////////////////////////////////////////////
 // THREE.JS
 //////////////////////////////////////////////////
@@ -175,8 +172,8 @@ function onWindowResize(){
   renderer.setSize($(window).width()-3, $(window).height()-5);
 }
 
-// spielfigurn der Scene hinzufügen
-scene.add(spielfigurn);
+// spielfiguren der Scene hinzufügen
+scene.add(spielfiguren);
 
 // Maussteuerung
 // controls = new THREE.OrbitControls( camera );
