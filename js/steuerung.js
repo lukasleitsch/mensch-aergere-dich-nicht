@@ -83,9 +83,6 @@ function init() {
 function wechsleSpieler () {
   gewuerfelt = false;
   counter = 0;
-  spielerArr.forEach(function(entry){
-    console.log(entry.aktiv);
-  })
   spielernummer = (spielernummer + 1) % anzahlSpieler;
   spielfeldDrehen (spielernummer);
   ausgabe (spielerArr[spielernummer].name + " ist an der Reihe.");

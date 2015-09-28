@@ -64,11 +64,12 @@ function spielfigur(color, hausfeld) {
 
     // Fuß
 
-    var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.3, segmente );
+    var geometry = new THREE.CylinderGeometry( 0.3, 0.3, 0.15, segmente );
     var material = new THREE.MeshPhongMaterial( {color: color} );
     var cylinder = new THREE.Mesh( geometry, material );
     cylinder.castShadow = true;
     cylinder.receiveShadow = true;
+    cylinder.translateY(0.075);
     group.add(cylinder);
 
 
@@ -178,9 +179,9 @@ function onWindowResize(){
 scene.add(spielfigurn);
 
 // Maussteuerung
-// controls = new THREE.OrbitControls( camera );
-// controls.damping = 0.2;
-// controls.addEventListener( 'change', render );
+controls = new THREE.OrbitControls( camera );
+controls.damping = 0.2;
+controls.addEventListener( 'change', render );
 
 // Loop-Funktion aufrufen
 var render = function() {
@@ -200,6 +201,7 @@ var material = new THREE.MeshPhongMaterial({
   color: 0xF1B55B
 });
 var cube = new THREE.Mesh(geometry, material);
+cube.translateY(-0.1);
 cube.receiveShadow = true;
 scene.add(cube);
 
@@ -211,7 +213,7 @@ scene.add(cube);
 * hat insgesamt 40 Felder zu denen noch die Gewinnfelder und die Haus-
 * felder kommen.
 */
-var cylinderGeometry = new THREE.CylinderGeometry(radius, radius, 0.2, segmente);
+var cylinderGeometry = new THREE.CylinderGeometry(radius, radius, 0.05, segmente);
 
 
 /*
