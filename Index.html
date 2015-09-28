@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -23,15 +23,15 @@
               </select>
             </div>
             <div class="spieler_farben">
-              <div class="spieler_1">Spieler 1 <span class="red"></span><span class="blau"></span><span class="gelb"></span><span class="gruen"></span></div>
-              <div class="spieler_2">Spieler 2 <span class="red"></span><span class="blau"></span><span class="gelb"></span><span class="gruen"></span></div>
-              <div class="spieler_3">Spieler 3 <span class="red"></span><span class="blau"></span><span class="gelb"></span><span class="gruen"></span></div>
-              <div class="spieler_4">Spieler 4 <span class="red"></span><span class="blau"></span><span class="gelb"></span><span class="gruen"></span></div>
+              <div class="spieler_1"><input type="text" placeholder="Name des Spielers" id="spieler1"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
+              <div class="spieler_2"><input type="text" placeholder="Name des Spielers" id="spieler2"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
+              <div class="spieler_3"><input type="text" placeholder="Name des Spielers" id="spieler3"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
+              <div class="spieler_4"><input type="text" placeholder="Name des Spielers" id="spieler4"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
-            <button type="button" class="btn btn-primary" id="menue_speichern">Speichern</button>
+          <span class="error">Jeder Spieler muss eine Farbe wählen.</span>
+            <button type="button" class="btn btn-primary" id="menue_speichern">Neues Spiel starten</button>
           </div>
         </div>
       </div>
@@ -82,6 +82,6 @@
 
   <script type="text/javascript" src="js/wuerfel.js"></script>
   <script type="text/javascript" src="js/spielfeld.js"></script>
-  <script type="text/javascript" src="js/menue.js"></script>
   <script type="text/javascript" src="js/steuerung.js"></script>
+  <script type="text/javascript" src="js/menue.js"></script>
 </html>

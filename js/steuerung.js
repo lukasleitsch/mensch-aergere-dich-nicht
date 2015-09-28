@@ -8,7 +8,73 @@ var spielernummer = 0;                  // Pointer auf Spieler
 var counter = 0;                        // Wuerfelzaehler
 var anzahlSpieler = 4;                  // Anzahl der Mitspieler
 var wuerfelZahl;                        // Gewuerfelte Augenzahl
-var gewuerfelt = false;                 // Sperrvariable
+var gewuerfelt = true;                 // Sperrvariable
+
+function init() {
+  // Spielfeld zurücksetzen
+  spielfelder.forEach(function(entry){
+    entry.position.y = 15;
+  });  
+  gewinnfelder.forEach(function(entry){
+    entry.forEach(function(entry1){
+    entry1.position.y = 15;
+    });
+  });
+  hausfelder.forEach(function(entry){
+    entry.forEach(function(entry1){
+    entry1.position.y = 15;
+    });
+  });
+  spielerArr.forEach(function(entry){
+      entry.figur1.position.y = 15;
+      entry.figur2.position.y = 15;
+      entry.figur3.position.y = 15;
+      entry.figur4.position.y = 15;
+  });
+
+  //Spielelemente animieren
+  var delay = 0;
+  spielfelder.forEach(function(entry){
+    new TWEEN.Tween (entry.position).to({x: entry.position.x, y: 0, z:entry.position.z}, 1000).easing(TWEEN.Easing.Quartic.Out).delay(delay).start();
+    delay = delay + 100;
+  });
+  gewinnfelder.forEach(function(entry){
+    entry.forEach(function(entry1){
+    new TWEEN.Tween (entry1.position).to({x: entry1.position.x, y: 0, z:entry1.position.z}, 1000).easing(TWEEN.Easing.Quartic.Out).delay(delay).start();
+    delay = delay + 100;
+    });
+  });
+  hausfelder.forEach(function(entry){
+    entry.forEach(function(entry1){
+    new TWEEN.Tween (entry1.position).to({x: entry1.position.x, y: 0, z:entry1.position.z}, 1000).easing(TWEEN.Easing.Quartic.Out).delay(delay).start();
+    delay = delay + 100;
+    });
+  });
+  spielerArr.forEach(function(entry){
+    if(entry.aktiv){
+      new TWEEN.Tween (entry.figur1.position).to({x: entry.figur1.position.x, y: 0, z:entry.figur1.position.z}, 1000).easing(TWEEN.Easing.Quartic.Out).delay(delay).start();
+      delay = delay + 100;
+      new TWEEN.Tween (entry.figur2.position).to({x: entry.figur2.position.x, y: 0, z:entry.figur2.position.z}, 1000).easing(TWEEN.Easing.Quartic.Out).delay(delay).start();
+      delay = delay + 100;
+      new TWEEN.Tween (entry.figur3.position).to({x: entry.figur3.position.x, y: 0, z:entry.figur3.position.z}, 1000).easing(TWEEN.Easing.Quartic.Out).delay(delay).start();
+      delay = delay + 100;
+      new TWEEN.Tween (entry.figur4.position).to({x: entry.figur4.position.x, y: 0, z:entry.figur4.position.z}, 1000).easing(TWEEN.Easing.Quartic.Out).delay(delay).start();
+      delay = delay + 100;
+    }
+  });
+  // Spielfeld zu erstem Spieler drehen
+  setTimeout(function(){
+    var first = false;
+    spielerArr.forEach(function(entry, index){
+        console.log(index);
+      if (entry.aktiv == true && !first){
+        spielfeldDrehen(index);
+        first = true;
+      }
+    });
+  }, delay + 2000);
+  gewuerfelt = false;
+}
 
 /*
  * Wechselt den aktuellen Spieler, Wuerfelcounter wird resetet und das
@@ -17,6 +83,9 @@ var gewuerfelt = false;                 // Sperrvariable
 function wechsleSpieler () {
   gewuerfelt = false;
   counter = 0;
+  spielerArr.forEach(function(entry){
+    console.log(entry.aktiv);
+  })
   spielernummer = (spielernummer + 1) % anzahlSpieler;
   spielfeldDrehen (spielernummer);
   ausgabe (spielerArr[spielernummer].name + " ist an der Reihe.");
@@ -36,9 +105,8 @@ function wuerfeln () {
     }
 
     // Hier ein Fenster oeffnen zum Bestaetigen zum Wuerfeln und/oder Animation
-    // var zahl = Math.floor((Math.random() * 6) + 1);
-    // wuerfelZahl = Math.floor((Math.random() * 6) + 1);
-    wuerfelZahl = 6;
+    wuerfelZahl = Math.floor((Math.random() * 6) + 1);
+    // wuerfelZahl = 6;
     wuerfelCube.rotation.x = 0;
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
@@ -403,7 +471,6 @@ function onMouseMove (event) {
  */
 function onMouseDown (event) {
 
-  event.preventDefault ();
   var raycaster = new THREE.Raycaster ();
   var mouse = new THREE.Vector2 ();
   // calculate mouse position in normalized device coordinates

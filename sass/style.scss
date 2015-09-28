@@ -15,25 +15,31 @@ body {
 	.spieler_3, .spieler_4 {
 		display: none;
 	}
+
+	.error {
+		color: red;
+		margin-right: 50px;
+		display: none;
+	}
 }
 
 .anzahl_spieler {
 	padding-bottom: 1.5em;
 	font-size: 1.4em;
 	select {
-		vertical-align: text-bottom;
+		border: none;
+		background-color: white;
 	}
 }
 
 .spieler_farben {
 	span {
+		width: 34px;
+		height: 34px;
 		display: inline-block;
-		vertical-align: text-top;
-		margin-right: 10px;
-		cursor: pointer;
-		@extend .btn;
-		@extend .btn-default;
-		&.red {
+		vertical-align: bottom;
+		margin-left: 10px;
+		&.rot {
 			background-color: red;
 		}
 		&.blau {
@@ -47,10 +53,30 @@ body {
 		}
 
 		&:hover {
-			border: 1px solid black;
+			opacity: 0.6;
+			cursor: pointer;
+		}
+
+		&.active, &.disable {
+			&:hover {
+				opacity: 1;
+				cursor: default;
+			}
+		}
+
+		&.disable {
+			background-color: gray;
 		}
 	}
 
+	input {
+		padding: 5px 10px 5px;
+		margin-right: 0;
+	}
+
+	> div {
+		margin-bottom: 20px;
+	}
 }
 
 #modal_wuerfeln .ergebnis {
