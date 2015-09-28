@@ -70,6 +70,7 @@ function init() {
       if (entry.aktiv == true && !first){
         spielfeldDrehen(index);
         first = true;
+        spielernummer = index;
       }
     });
   }, delay + 2000);
@@ -83,10 +84,12 @@ function init() {
 function wechsleSpieler () {
   gewuerfelt = false;
   counter = 0;
-  spielerArr.forEach(function(entry){
-    console.log(entry.aktiv);
-  })
-  spielernummer = (spielernummer + 1) % anzahlSpieler;
+  for(i = 1; i < spielerArr.length; i++){
+    if(spielerArr[(spielernummer + i) % spielerArr.length ].aktiv){
+      spielernummer = (spielernummer + i) % spielerArr.length;
+      break;
+    }
+  }
   spielfeldDrehen (spielernummer);
   ausgabe (spielerArr[spielernummer].name + " ist an der Reihe.");
   setTimeout (function () {

@@ -22,7 +22,7 @@ var spielerArr = new Array(4);             //Spielerobjekte
 
 // Initialisiere SpielerBlau
 var spielerBlau = {
-  aktiv: "",
+  aktiv: false,
   name: "Blau",
   farbe: 0x2600FF,
   start: 0
@@ -30,7 +30,7 @@ var spielerBlau = {
 
 // Initialisiere SpielerRot
 var spielerRot = {
-  aktiv: "",
+  aktiv: false,
   name: "Rot",
   farbe: 0xFF0000,
   start: 10
@@ -38,7 +38,7 @@ var spielerRot = {
 
 // Initialisiere SpielerGeld
 var spielerGelb = {
-  aktiv: "",
+  aktiv: false,
   name: "Gelb",
   farbe: 0xFFFC00, 
   start: 20
@@ -46,7 +46,7 @@ var spielerGelb = {
 
 // Initialisiere SpielerGruen
 var spielerGruen = {
-  aktiv: "",
+  aktiv: false,
   name: "Grün",
   farbe: 0x2EAE00,
   start: 30
