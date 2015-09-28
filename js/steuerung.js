@@ -127,32 +127,32 @@ function wuerfeln () {
     // Animation des Würfels entsprechend der Zufallszahl
     switch (wuerfelZahl) {
       case 1:
-        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (0), z : rad (90), y : rad (0)}, 2000).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
+        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (0), z : rad (90), y : rad (0)}, 1500).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
           show_result ()
         });
         break;
       case 2:
-        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (90), z : rad (0), y : rad (0)}, 2000).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
+        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (90), z : rad (0), y : rad (0)}, 1500).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
           show_result ()
         });
         break;
       case 3:
-        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (0), z : rad (0), y : rad (0)}, 2000).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
+        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (0), z : rad (0), y : rad (0)}, 1500).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
           show_result ()
         });
         break;
       case 4:
-        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (180), z : rad (0), y : rad (0)}, 2000).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
+        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (180), z : rad (0), y : rad (0)}, 1500).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
           show_result ()
         });
         break;
       case 5:
-        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (-90), z : rad (0), y : rad (0)}, 2000).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
+        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (-90), z : rad (0), y : rad (0)}, 1500).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
           show_result ()
         });
         break;
       case 6:
-        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (0), z : rad (-90), y : rad (0)}, 2000).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
+        new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (0), z : rad (-90), y : rad (0)}, 1500).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
           show_result ()
         });
         break;
@@ -258,7 +258,7 @@ function setzeHut (figur) {
       //Prueft wie oft gewuerfelt und ob eine 6 gewuerfelt wurde
       if (counter < 3 && wuerfelZahl === 6) {
         //Setzt die Figur auf das Startfeld der entsprechenden Farbe
-        var setzen = new TWEEN.Tween (figur.position).to (spielfelder[spieler.start].position, 1000).easing (TWEEN.Easing.Elastic.InOut);
+        var setzen = new TWEEN.Tween (figur.position).to (spielfelder[spieler.start].position, 1000).easing (TWEEN.Easing.Bounce.Out);
         figur.aktuellePos = spieler.start;
         //Sitzt eine Figur dort, wird diese rausgeworfen
         if (spielfelder[figur.aktuellePos].besetzt) {
@@ -359,7 +359,7 @@ function rauswerfen (feldnummer) {
 //Ermittle Spieler und Figur
   var spielerFigur = spielfelder[feldnummer].besetzt;
   //Animation zum Hausfeld
-  var rauswurf = new TWEEN.Tween (spielerFigur.position).to (spielerFigur.hausfeld.position, 1000).easing (TWEEN.Easing.Elastic.InOut);
+  var rauswurf = new TWEEN.Tween (spielerFigur.position).to (spielerFigur.hausfeld.position, 500).easing (TWEEN.Easing.Quintic.InOut);
   //Loesche Aktivitaet
   delete spielerFigur.aktuellePos;
   return rauswurf;
@@ -395,8 +395,8 @@ function pruefeWeg (figur) {
   //differenz
   var dif = (spielfelder.length + gewinnfelder[spielernummer].length) - (((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl);
   if (((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < spielfelder.length
-          || ((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < (spielfelder.length + gewinnfelder[spielernummer].length)
-          && (typeof gewinnfelder[spielernummer][dif].besetzt === 'undefined')) {
+          || (((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < (spielfelder.length + gewinnfelder[spielernummer].length)
+          && (typeof gewinnfelder[spielernummer][gewinnfelder[spielernummer].length - dif].besetzt === 'undefined'))) {
     return true;
   }
   else {
@@ -409,10 +409,10 @@ function pruefeWeg (figur) {
  * @returns {Boolean}
  */
 function pruefeFertig(){
-  if(typeof gewinnfelder[spielernummer][0].besetzt &&
-     typeof gewinnfelder[spielernummer][1].besetzt &&
-     typeof gewinnfelder[spielernummer][2].besetzt &&
-     typeof gewinnfelder[spielernummer][3].besetzt ){
+  if(gewinnfelder[spielernummer][0].besetzt &&
+     gewinnfelder[spielernummer][1].besetzt &&
+     gewinnfelder[spielernummer][2].besetzt &&
+     gewinnfelder[spielernummer][3].besetzt ){
     return true;
   }
   return false;
