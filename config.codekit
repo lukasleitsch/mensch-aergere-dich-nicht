@@ -1538,6 +1538,17 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+	"\/Screenshots\/02092015 - Ausweichen.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 195033,
+		"inputAbbreviatedPath": "\/Screenshots\/02092015 - Ausweichen.png",
+		"outputAbbreviatedPath": "\/Screenshots\/02092015 - Ausweichen.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/Screenshots\/021092015 - NeueButtons.JPG": {
 		"fileType": 16384,
 		"ignore": 0,
