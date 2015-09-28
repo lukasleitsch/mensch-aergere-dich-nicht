@@ -281,6 +281,10 @@ function setzeHut (figur) {
               tween.push (new TWEEN.Tween (figur.position).to (gewinnfelder[spielernummer][0].position, 500).easing (TWEEN.Easing.Elastic.InOut));
               figur.aktuellePos = 1000;
             }
+            if(pruefeFertig()){
+              ausgabe("Spieler "+ spielerArr[spielernummer].name +" ist fertig!");
+              spielerArr[spielernummer].aktiv = false;
+            }
           }
           else {
             //Rauswerfen sofern das letzte Feld besetzt ist
@@ -386,6 +390,16 @@ function pruefeWeg (figur) {
   else {
     return false;
   }
+}
+
+function pruefeFertig(){
+  if(typeof gewinnfelder[spielernummer][0] !== 'undefined' &&
+     typeof gewinnfelder[spielernummer][1] !== 'undefined' &&
+     typeof gewinnfelder[spielernummer][2] !== 'undefined' &&
+     typeof gewinnfelder[spielernummer][3] !== 'undefined'){
+    return true;
+  }
+  return false;
 }
 
 // Maus-Events
