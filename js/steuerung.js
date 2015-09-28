@@ -395,7 +395,7 @@ function pruefeWeg (figur) {
   //differenz
   var dif = (spielfelder.length + gewinnfelder[spielernummer].length) - (((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl);
   if (((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < spielfelder.length
-          || ((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < (spielfelder.length + gewinnfelder[spielernummer].length - 1)
+          || ((figur.aktuellePos + 40 - spieler.start) % spielfelder.length) + wuerfelZahl < (spielfelder.length + gewinnfelder[spielernummer].length)
           && (typeof gewinnfelder[spielernummer][dif].besetzt === 'undefined')) {
     return true;
   }
@@ -404,11 +404,15 @@ function pruefeWeg (figur) {
   }
 }
 
+/*
+ * Ueberprueft, ob ein Spieler bereits die Gewinnbedingungen erfuellt hat
+ * @returns {Boolean}
+ */
 function pruefeFertig(){
-  if(typeof gewinnfelder[spielernummer][0] !== 'undefined' &&
-     typeof gewinnfelder[spielernummer][1] !== 'undefined' &&
-     typeof gewinnfelder[spielernummer][2] !== 'undefined' &&
-     typeof gewinnfelder[spielernummer][3] !== 'undefined'){
+  if(typeof gewinnfelder[spielernummer][0].besetzt &&
+     typeof gewinnfelder[spielernummer][1].besetzt &&
+     typeof gewinnfelder[spielernummer][2].besetzt &&
+     typeof gewinnfelder[spielernummer][3].besetzt ){
     return true;
   }
   return false;
