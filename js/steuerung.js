@@ -11,20 +11,24 @@ var wuerfelZahl;                        // Gewuerfelte Augenzahl
 var gewuerfelt = true;                 // Sperrvariable
 
 function init() {
+
   // Spielfeld zurücksetzen
   spielfelder.forEach(function(entry){
     entry.position.y = 15;
-  });  
+  }); 
+
   gewinnfelder.forEach(function(entry){
     entry.forEach(function(entry1){
     entry1.position.y = 15;
     });
   });
+
   hausfelder.forEach(function(entry){
     entry.forEach(function(entry1){
     entry1.position.y = 15;
     });
   });
+
   spielerArr.forEach(function(entry){
       entry.figur1.position.y = 15;
       entry.figur2.position.y = 15;
@@ -62,7 +66,7 @@ function init() {
       delay = delay + 100;
     }
   });
-  // Spielfeld zu erstem Spieler drehen
+  // Spielfeld zum ersten aktiven Spieler drehen
   setTimeout(function(){
     var first = false;
     spielerArr.forEach(function(entry, index){
@@ -114,12 +118,13 @@ function wuerfeln () {
     wuerfelCube.rotation.y = 0;
     wuerfelCube.rotation.z = 0;
 
-    //Ã–ffnet Fenster
+    // Öffne Würfel-Overlay
     $ ('#modal_wuerfeln').modal ('show');
     rendererWuerfel.setSize ($ ('#modal_wuerfeln .modal-body').width (), 300);
 
     $ ('#modal_wuerfeln .ergebnis').html (wuerfelZahl);
 
+    // Animation des Würfels entsprechend der Zufallszahl
     switch (wuerfelZahl) {
       case 1:
         new TWEEN.Tween (wuerfelCube.rotation).to ({x : rad (0), z : rad (90), y : rad (0)}, 2000).easing (TWEEN.Easing.Elastic.Out).delay (500).start ().onComplete (function () {
@@ -153,6 +158,7 @@ function wuerfeln () {
         break;
     }
 
+    // Ergebnis des Würfelns wird nochmal angezeigt
     function show_result () {
       $ ("#modal_wuerfeln .ergebnis").show ().css ({
         opacity : '0',
@@ -411,7 +417,7 @@ function pruefeFertig(){
 // Maus-Events
 
 /*
- * Maus-Over Effekt fuer die spielfigurn. Wurde gewuerfelt und alle Bedingungen
+ * Maus-Over Effekt fuer die spielfiguren. Wurde gewuerfelt und alle Bedingungen
  * sind erfuellt, so faerbt sich das zu erreichende Spielfeld, von dem sich 
  * unter dem Mauszeiger befindliche Spielerhuetchen, rot
  */
@@ -427,7 +433,7 @@ function onMouseMove (event) {
     // update the picking ray with the camera and mouse position 
     raycaster.setFromCamera (mouse, camera);
     // calculate objects intersecting the picking ray
-    var intersects = raycaster.intersectObjects (spielfigurn.children, true);
+    var intersects = raycaster.intersectObjects (spielfiguren.children, true);
     if (intersects.length) {
       if (spielernummer === intersects[0].object.parent.spielernummer) {
         if (typeof intersects[0].object.parent.aktuellePos === 'undefined' && wuerfelZahl === 6) {
@@ -466,7 +472,6 @@ function onMouseMove (event) {
   }
 }
 
-
 /*
  * Maus-Klick Event, das zu dem aktuellen Spieler und dessen gewuerfelte
  * Augenzahl das gewuenschte Huetchen setzt, sofern die Bedingung erfuellt 
@@ -484,7 +489,7 @@ function onMouseDown (event) {
   // update the picking ray with the camera and mouse position 
   raycaster.setFromCamera (mouse, camera);
   // calculate objects intersecting the picking ray
-  var intersects = raycaster.intersectObjects (spielfigurn.children, true);
+  var intersects = raycaster.intersectObjects (spielfiguren.children, true);
   if (intersects.length) {
 // Nur aktiver Spieler darf Figuren setzen
     if (spielernummer === intersects[0].object.parent.spielernummer) {

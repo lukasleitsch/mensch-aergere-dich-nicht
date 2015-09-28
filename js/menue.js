@@ -3,11 +3,6 @@
  * während des Spiels aufgerufen werden kann.
  */
 
-/*
- * Erstellt das Startmenue in dem der Spieler diverse Optionen zum Start des
- * Spiels einstellen und waehlen kann
- */
-
 var farben_spieler = new Array(4);
 
 $(function() {
@@ -16,7 +11,6 @@ $(function() {
   $('#menu').modal();
 
   // Mit der Anzahl der Spieler werden weitere Felder eingeblendet
-
   $('#spieleranzahl').change(function(event) {
     switch (event.target.value) {
       case '3':
@@ -33,7 +27,6 @@ $(function() {
   });
 
   // Zeige Menue, wenn der Button Pause gedrückt wird
-
   $('button.pause').click(function(event) {
     $('#menu').modal('show');
 
@@ -45,9 +38,7 @@ $(function() {
     $('.spieler_3, .spieler_4').hide();
   });
 
-
   // Farbe für Spieler festhalten und gleiche Farbe für andere Spieler deaktivieren
-
   $('.spieler_farben span').each(function(index, el) {
     // Beim Klick auf die Farbe
     $(this).click(function(event) {
@@ -73,14 +64,17 @@ $(function() {
     });
   });
 
+// Speichern des Menüs
   $('#menue_speichern').click(function(event) {
+    // Zählen der aktiven Spieler
     var countSpieler = $('.spieler_farben .active').length.toString();
+    // Überprüfen, ob alle Spieler eine Farbe gewählt haben
     if($('#spieleranzahl').val() !== countSpieler){
       $('#menu .error').fadeIn('fast');
     } else {
       $('#menu').modal('hide');
       $('#menu .error').hide();
-      // Alter Spieler resten
+      // Alte aktive Spieler zurücksetzen
       spielerBlau.aktiv = false;
       spielerRot.aktiv = false;
       spielerGelb.aktiv = false;
@@ -116,9 +110,7 @@ $(function() {
         }
       });
       anzahlSpieler = countSpieler;
-      init();
+      init(); // Aufruf von init() in steuerung.js
     }
   });
 });
-
-

@@ -179,9 +179,9 @@ function onWindowResize(){
 scene.add(spielfigurn);
 
 // Maussteuerung
-controls = new THREE.OrbitControls( camera );
-controls.damping = 0.2;
-controls.addEventListener( 'change', render );
+// controls = new THREE.OrbitControls( camera );
+// controls.damping = 0.2;
+// controls.addEventListener( 'change', render );
 
 // Loop-Funktion aufrufen
 var render = function() {
