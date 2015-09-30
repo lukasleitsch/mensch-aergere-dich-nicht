@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" /> 
+    <title>Mensch ärgere Dich nicht - Grafische Datenverarbeitung</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <div class="modal fade" id="menu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Mensch ärgere Dich nicht</h4>
+          </div>
+          <div class="modal-body">
+            <div class="anzahl_spieler">
+              <span>Anzahl der Spieler</span>
+              <select id="spieleranzahl">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+            <div class="spieler_farben">
+              <div class="spieler_1"><input type="text" placeholder="Name des Spielers" id="spieler1"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
+              <div class="spieler_2"><input type="text" placeholder="Name des Spielers" id="spieler2"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
+              <div class="spieler_3"><input type="text" placeholder="Name des Spielers" id="spieler3"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
+              <div class="spieler_4"><input type="text" placeholder="Name des Spielers" id="spieler4"> <span data-color="rot" class="rot"></span><span data-color="blau" class="blau"></span><span data-color="gelb" class="gelb"></span><span data-color="gruen" class="gruen"></span></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <span class="error">Jeder Spieler muss eine Farbe wählen.</span>
+            <button type="button" class="btn btn-primary" id="menue_speichern">Neues Spiel starten</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_wuerfeln" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div id="wuerfel"></div>
+              <div class="ergebnis"></div>   
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="wuerfeln">
+        <button class="button wuerfeln">Würfeln</button>
+      </div>
+
+      <div id="ausgabe">
+        <div class="content">
+          Mensch ärgere dich nicht
+        </div>
+      </div>
+
+      <div class="pause">
+        <button class="button pause" >Menü</button>
+      </div>
+    </div>
+
+
+    <div id="spielfeld"></div>
+
+
+
+
+
+  </body>
+  <script src="js/three.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap/transition.js"></script>
+  <script src="js/bootstrap/modal.js"></script>
+  <script src="js/OrbitControls.js"></script>
+  <script src="js/tween.min.js"></script>
+
+  <script type="text/javascript" src="js/wuerfel.js"></script>
+  <script type="text/javascript" src="js/spielfeld.js"></script>
+  <script type="text/javascript" src="js/steuerung.js"></script>
+  <script type="text/javascript" src="js/menue.js"></script>
+</html>
